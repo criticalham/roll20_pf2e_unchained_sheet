@@ -17678,18 +17678,13 @@ function SetWeaponRollCalculations(sectionID, adjustments)
   getAttrs([
     prefix+"proficiency", prefix+"potency", prefix+"quality", prefix+"hit_stat", prefix+"hit_bonus", prefix+"multiple_attack_penalty",
   ].concat(ListVariables(sectionType, sectionID, traitParams)).concat(ListVariables(sectionType, sectionID, ["traits"])), function (sectionValues) {
-    console.log("------------------- WEAPON UPDATE");
 
     let proficiency = "bonus_weapon_" + sectionValues[prefix+"proficiency"]
-
-    console.log(proficiency);
 
     let baseStatName = sectionValues[prefix+"hit_stat"];
     if (baseStatName && baseStatName != "none") {
       proficiency += "_" + baseStatName;
     }
-
-    console.log(proficiency);
 
     let multiAttackPenalty = SafeNum(sectionValues[prefix+"multiple_attack_penalty"]);
 
@@ -17736,10 +17731,6 @@ function SetWeaponRollCalculations(sectionID, adjustments)
 
       let totalDisplay = total >= 0 ? "+"+total : "-"+total;
 
-      console.log(sectionValues);
-      console.log(globalValues);
-      console.log(total);
-
       if (SafeNum(sectionValues[prefix+"wtrait_backswing"])) {
         totalAdjust.bonus_circumstance = "{[[" + totalAdjust.bonus_circumstance +
           "]], ?{BACKSWING: Did you miss your previous attack with this weapon on this turn?|No,0|Yes,1}}kh1";
@@ -17772,7 +17763,6 @@ function SetWeaponRollCalculations(sectionID, adjustments)
         [prefix+"roll_total_display"]: totalDisplay,
         [prefix+"multiple_attack_penalty_double"]: multiAttackPenalty * 2
       };
-      console.log(attributes);
       setAttrs(attributes);
     });
   });
@@ -19519,11 +19509,6 @@ function WatchTotalPrepared(spellLevel, slots) {
       for (let i = 0; i < slots.length && i < max; ++i) {
         totalPrepared += SafeNum(values[slots[i]]) > 0 ? 1 : 0;
       }
-      console.log("-------------------- CALCULATED ");
-      console.log(spellLevel);
-      console.log(slots);
-      console.log(totalPrepared);
-      console.log(values);
       setAttrs({["prepared_slots_l"+spellLevel]: totalPrepared});
     });
   });
@@ -19548,28 +19533,18 @@ function WatchSpellSlot(spellLevel, slotID) {
         nameKeys.push(rID(categoryType, itemIDs[i], "name"));
       }
 
-      console.log("---------------------- SPELL SLOT ---------------------");
-      console.log(nameKeys);
-
       getAttrs(nameKeys, function (values) {
         let query = values[targetVariable] ? values[targetVariable].trim().toLowerCase() : "";
         let itemID = " ";
         let itemStatus = "0";
         let itemMatched = "no spell equipped!";
 
-        console.log("query");
-        console.log(query);
-        console.log(values);
-        console.log(itemIDs);
-
         let foundOne = false;
         for (let j = 0; j < itemIDs.length; ++j)
         {
           let itemName = values[rID(categoryType, itemIDs[j], "name")];
-          console.log(itemName);
           if (itemName && itemName.toLowerCase() == query)
           {
-            console.log(itemName.toLowerCase());
             if (foundOne)
             {
               itemMatched = "duplicate spell! using first!";
@@ -19592,9 +19567,6 @@ function WatchSpellSlot(spellLevel, slotID) {
           [key+"_message"]: itemMatched,
           [key+"_roll"]: template
         };
-        
-        console.log(values);
-        console.log(results);
         setAttrs(results);
       });
     })
