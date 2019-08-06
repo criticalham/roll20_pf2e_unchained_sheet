@@ -18646,7 +18646,7 @@ function WatchReagents() {
     getAttrs(["base_reagent_stat"], function (prevalues) {
       getAttrs(["base_reagent_bonus", prevalues.base_reagent_stat], function (values) {
         let bonus = SafeNum(values.base_reagent_bonus);
-        setAttrs({reagent_max: bonus + RetrieveMod(values)});
+        setAttrs({reagent_max: level + bonus + RetrieveMod(values)});
       });
     });
   });
