@@ -1788,7 +1788,7 @@
             <div class="sheet-table sheet-table-hp">
               <div class="sheet-table-hp-entry">
                 <div class="sheet-table-hp-header">Land</div>
-                <div class="sheet-table-hp-value"><input type="number" value="30" name="attr_speed_land_base"/></div>
+                <div class="sheet-table-hp-value"><input type="number" value="25" name="attr_speed_land_base"/></div>
               </div>
               <div class="sheet-table-hp-entry">
                 <div class="sheet-table-hp-header">Climb</div>
@@ -3414,7 +3414,7 @@
           <div>Movement Speed</div>
         </div>
         <div class="sheet-movement-types">
-          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_land"/>
+          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_land" value="25"/>
           <div class="sheet-movement-type">
             <div class="sheet-movement-name">Land</div>
             <div class="sheet-movement-speed">
@@ -3422,7 +3422,7 @@
               <span name="attr_speed_land">0</span>
             </div>
           </div>
-          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_climb"/>
+          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_climb" value="0"/>
           <div class="sheet-movement-type">
             <div class="sheet-movement-name">Climb</div>
             <div class="sheet-movement-speed">
@@ -3430,7 +3430,7 @@
               <span name="attr_speed_climb">0</span>
             </div>
           </div>
-          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_swim"/>
+          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_swim" value="0"/>
           <div class="sheet-movement-type">
             <div class="sheet-movement-name">Swim</div>
             <div class="sheet-movement-speed">
@@ -3438,7 +3438,7 @@
               <span name="attr_speed_swim">0</span>
             </div>
           </div>
-          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_fly"/>
+          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_fly" value="0"/>
           <div class="sheet-movement-type">
             <div class="sheet-movement-name">Fly</div>
             <div class="sheet-movement-speed">
@@ -3446,7 +3446,7 @@
               <span name="attr_speed_fly">0</span>
             </div>
           </div>
-          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_burrow"/>
+          <input class="sheet-hide-next-if-zero" type="hidden" name="attr_speed_burrow" value="0"/>
           <div class="sheet-movement-type">
             <div class="sheet-movement-name">Burrow</div>
             <div class="sheet-movement-speed">
@@ -18629,9 +18629,6 @@ function WatchHP() {
         let hasToughness = SafeNum(values.has_toughness) > 0;
         let hpToughness = hasToughness ? level : 0;
 
-        console.log("---------------------------- PART 1");
-        console.log(values);
-
         let hpMax = hpAncestry + ((hpClass + hpConMod) * level) + hpBonus + hpToughness;
         let hpOriginalMax = hpMax;
 
@@ -18653,9 +18650,6 @@ function WatchHP() {
           hp_temp_percent: SafeNum(Math.min(100, Math.max(0, Math.floor((hpTemp / hpTotal) * 100)))),
           hp_missing_percent: SafeNum(Math.min(100, Math.max(0, Math.floor(((hpMax - (hpNewCurrent + hpTemp)) / hpTotal) * 100))))
         };
-
-        console.log("---------------------------- HP CHECK");
-        console.log(attributes);
 
         setAttrs(attributes);
       });
