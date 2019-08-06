@@ -18835,6 +18835,7 @@ function ForceDefaultValues() {
     ForceSectionRefresh("item");
     ForceSectionRefresh("formula");
     ForceSectionRefresh("mod");
+    UpdateArmorClass();
   });
 
   on("sheet:opened change:level change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod"
@@ -19237,7 +19238,7 @@ function IsBroken(equipment, sectionType, sectionID)
 function WatchArmorClass() {
   on("change:dex_mod change:option_shield change:shield_raised" +
     " change:bonus_armor_unarmored change:bonus_armor_light change:bonus_armor_medium" +
-    " change:bonus_armor_heavy change:bonus_armor_shields" +
+    " change:bonus_armor_heavy" +
     " change:equipped_armor_status change:equipped_shield_status" +
     " remove:repeating_armor change:repeating_armor:carry_state" +
     " change:repeating_armor:bonus_ac" +
@@ -19250,195 +19251,175 @@ function WatchArmorClass() {
     " change:repeating_armor:dent_4 change:repeating_armor:dent_5 change:repeating_armor:dent_6" +
     " remove:repeating_shield change:repeating_shield:carry_state" +
     " change:repeating_shield:bonus_ac" +
-    " change:repeating_shield:check_penalty change:repeating_shield:quality" +
+    " change:repeating_shield:quality" +
     " change:repeating_shield:quality change:repeating_shield:speed_penalty" +
     " change:repeating_shield:dent_cap" +
     " change:repeating_shield:dent_1 change:repeating_shield:dent_2 change:repeating_shield:dent_3" +
     " change:repeating_shield:dent_4 change:repeating_shield:dent_5 change:repeating_shield:dent_6" +
     " change:repeating_shield:hardness " + GetWatchedModVariables(), function(eventInfo) {
-    GetAdjustments(function (adjustments) {
-      getAttrs([
-        "dex_mod",
-        "equipped_armor_id", "equipped_armor_status",
-        "option_shield", "shield_raised", "equipped_shield_id", "equipped_shield_status",
-        "bonus_armor_unarmored", "bonus_armor_light", "bonus_armor_medium",
-        "bonus_armor_heavy", "bonus_armor_shields"
-      ], function (baseValues) {
-        let variables = [];
+    UpdateArmorClass();
+  });
+}
 
-        let isWearingArmor = SafeNum(baseValues.equipped_armor_status) > 0;
-        let armorID = baseValues.equipped_armor_id;
-        if (isWearingArmor) {
-          variables = variables.concat(ListVariables("armor", armorID, [
-            "bonus_ac", "option_max_dex", "max_dex", "carry_state",
-            "check_penalty", "speed_penalty",
-            "proficiency", "potency", "quality",
-            "atrait_clumsy", "atrait_fragile", "atrait_noisy",
-            "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
-          ]));
+function UpdateArmorClass() {
+  GetAdjustments(function (adjustments) {
+    getAttrs([
+      "dex_mod",
+      "equipped_armor_id", "equipped_armor_status",
+      "option_shield", "shield_raised", "equipped_shield_id", "equipped_shield_status",
+      "bonus_armor_unarmored", "bonus_armor_light", "bonus_armor_medium",
+      "bonus_armor_heavy"
+    ], function (baseValues) {
+      let variables = [];
+
+      let isWearingArmor = SafeNum(baseValues.equipped_armor_status) > 0;
+      let armorID = baseValues.equipped_armor_id;
+      if (isWearingArmor) {
+        variables = variables.concat(ListVariables("armor", armorID, [
+          "bonus_ac", "option_max_dex", "max_dex", "carry_state",
+          "check_penalty", "speed_penalty",
+          "proficiency", "potency", "quality",
+          "atrait_clumsy", "atrait_fragile", "atrait_noisy",
+          "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
+        ]));
+      }
+
+      let isWieldingShield = baseValues.option_shield && SafeNum(baseValues.equipped_armor_status) > 0;
+      let isShieldRaised = isWieldingShield && SafeNum(baseValues.shield_raised);
+      let shieldID = baseValues.equipped_shield_id;
+      if (isWieldingShield) {
+        variables = variables.concat(ListVariables("shield", shieldID, [
+          "bonus_ac", "quality", "carry_state", "hardness",
+          "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
+        ]));
+      }
+
+      getAttrs(variables, function (equipment) {
+        let dexBonus = SafeNum(baseValues.dex_mod);
+        let proficiencyBonus = 0;
+        let armorType = "unarmored";
+        let hardness = 0;
+
+        let modAC = NewAdjustmentTracker();
+        AddAdjustmentMods("ac", adjustments, modAC);
+
+        let saveBonus = 0;
+        let armorCheck = 0;
+        let speedPenalty = 0;
+        let shieldCheck = 0;
+        let isClumsy = 0;
+        let isNoisy = 0;
+        let dexCap = -1;
+
+        if (isWearingArmor && equipment[rID("armor",armorID,"carry_state")] == "carried")
+        {
+          isClumsy = SafeNum(equipment[rID("armor",armorID,"atrait_clumsy")]) > 0 ? 1 : 0;
+          isNoisy = SafeNum(equipment[rID("armor",armorID,"atrait_noisy")]) > 0 ? 1 : 0;
+
+          if (SafeNum(equipment[rID("armor",armorID,"option_max_dex")]))
+          {
+            dexCap = Math.max(0, SafeNum(equipment[rID("armor",armorID,"max_dex")]));
+
+            let modMaxDex = NewAdjustmentTracker();
+            AddAdjustmentMods("max_dex", adjustments, modMaxDex);
+            if (modMaxDex.min) { dexCap = Math.min(dexCap, modMaxDex.min); }
+            if (modMaxDex.max) { dexCap = Math.max(dexCap, modMaxDex.max); }
+            dexCap = dexCap + modMaxDex.untyped +
+              Math.max(0,modMaxDex.bonus_status) + Math.max(0,modMaxDex.bonus_circumstance) + Math.max(0,modMaxDex.bonus_item) +
+              Math.min(0,modMaxDex.penalty_status) + Math.min(0,modMaxDex.penalty_circumstance) + Math.min(0,modMaxDex.penalty_item);
+
+            dexBonus = Math.min(dexBonus, dexCap);
+          }
+          armorType = equipment[rID("armor",armorID,"proficiency")];
+
+          let potency = SafeNum(equipment[rID("armor",armorID,"potency")]);
+
+          modAC.bonus_item = Math.max(modAC.bonus_item, SafeNum(equipment[rID("armor",armorID,"bonus_ac")]) + potency);
+
+          armorCheck = SafeNum(equipment[rID("armor",armorID,"check_penalty")]);
+          speedPenalty = SafeNum(equipment[rID("armor",armorID,"speed_penalty")]);
+
+          let quality = equipment[rID("armor",armorID,"quality")];
+          switch (quality) {
+            case "poor":
+              modAC.bonus_item -= 2;
+              armorCheck -= 2;
+              break;
+          }
+          armorCheck = Math.min(0, armorCheck);
+
+          if (IsBroken(equipment,"armor",armorID))
+          {
+            let brokenPenalty = 0;
+            switch (armorType)
+            {
+              default:
+                break;
+              case "light":
+                brokenPenalty = -1;
+                break;
+              case "medium":
+                brokenPenalty = -2;
+                break;
+              case "heavy":
+                brokenPenalty = -3;
+                break;
+            }
+            modAC.penalty_status = Math.min(modAC.penalty_status, brokenPenalty);
+          }
         }
 
-        let isWieldingShield = baseValues.option_shield && SafeNum(baseValues.equipped_armor_status) > 0;
-        let isShieldRaised = isWieldingShield && SafeNum(baseValues.shield_raised);
-        let shieldID = baseValues.equipped_shield_id;
-        if (isWieldingShield) {
-          variables = variables.concat(ListVariables("shield", shieldID, [
-            "bonus_ac", "check_penalty", "quality", "carry_state", "hardness",
-            "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
-          ]));
+        proficiencyBonus = SafeNum(baseValues["bonus_armor_"+armorType]);
+
+        if (isWieldingShield && equipment[rID("shield",shieldID,"carry_state")] == "carried")
+        {
+          shieldCheck = 0;
+
+          let quality = equipment[rID("shield",armorID,"quality")];
+          switch (quality) {
+            case "poor":
+              shieldCheck -= 2;
+              break;
+          }
+          shieldCheck = Math.min(0, shieldCheck);
+
+          if (!IsBroken(equipment, "shield", shieldID))
+          {
+            if (isShieldRaised)
+            {
+              modAC.bonus_circumstance = Math.max(modAC.bonus_circumstance, SafeNum(equipment[rID("shield",shieldID,"bonus_ac")]));
+            }
+            hardness = SafeNum(equipment[rID("shield",shieldID,"hardness")]);
+          }
         }
 
-        getAttrs(variables, function (equipment) {
-          let dexBonus = SafeNum(baseValues.dex_mod);
-          let proficiencyBonus = 0;
-          let armorType = "unarmored";
-          let hardness = 0;
+        let ac = 10 + dexBonus + proficiencyBonus +
+          Math.max(0,modAC.bonus_status) + Math.max(0,modAC.bonus_circumstance) + Math.max(0,modAC.bonus_item) +
+          Math.min(0,modAC.penalty_status) + Math.min(0,modAC.penalty_circumstance) + Math.min(0,modAC.penalty_item) +
+          modAC.untyped;
+        if (modAC.min) { ac = Math.min(ac, modAC.min); }
+        if (modAC.max) { ac = Math.max(ac, modAC.max); }
 
-          let modAC = NewAdjustmentTracker();
-          AddAdjustmentMods("ac", adjustments, modAC);
-
-          let saveBonus = 0;
-          let armorCheck = 0;
-          let speedPenalty = 0;
-          let shieldCheck = 0;
-          let isClumsy = 0;
-          let isNoisy = 0;
-          let dexCap = -1;
-
-          if (isWearingArmor && equipment[rID("armor",armorID,"carry_state")] == "carried")
-          {
-            isClumsy = SafeNum(equipment[rID("armor",armorID,"atrait_clumsy")]) > 0 ? 1 : 0;
-            isNoisy = SafeNum(equipment[rID("armor",armorID,"atrait_noisy")]) > 0 ? 1 : 0;
-
-            if (SafeNum(equipment[rID("armor",armorID,"option_max_dex")]))
-            {
-              dexCap = Math.max(0, SafeNum(equipment[rID("armor",armorID,"max_dex")]));
-
-              let modMaxDex = NewAdjustmentTracker();
-              AddAdjustmentMods("max_dex", adjustments, modMaxDex);
-              if (modMaxDex.min) { dexCap = Math.min(dexCap, modMaxDex.min); }
-              if (modMaxDex.max) { dexCap = Math.max(dexCap, modMaxDex.max); }
-              dexCap = dexCap + modMaxDex.untyped +
-                Math.max(0,modMaxDex.bonus_status) + Math.max(0,modMaxDex.bonus_circumstance) + Math.max(0,modMaxDex.bonus_item) +
-                Math.min(0,modMaxDex.penalty_status) + Math.min(0,modMaxDex.penalty_circumstance) + Math.min(0,modMaxDex.penalty_item);
-
-              dexBonus = Math.min(dexBonus, dexCap);
-            }
-            armorType = equipment[rID("armor",armorID,"proficiency")];
-
-            let potency = SafeNum(equipment[rID("armor",armorID,"potency")]);
-
-            modAC.bonus_item = Math.max(modAC.bonus_item, SafeNum(equipment[rID("armor",armorID,"bonus_ac")]) + potency);
-
-            armorCheck = SafeNum(equipment[rID("armor",armorID,"check_penalty")]);
-            speedPenalty = SafeNum(equipment[rID("armor",armorID,"speed_penalty")]);
-
-            let quality = equipment[rID("armor",armorID,"quality")];
-            switch (quality) {
-              case "poor":
-                modAC.bonus_item -= 2;
-                armorCheck -= 2;
-                break;
-              case "standard":
-                break;
-              case "expert":
-                armorCheck += 1;
-                break;
-              case "master":
-                armorCheck += 2;
-                break;
-              case "legendary":
-                armorCheck += 3;
-                break;
-            }
-            armorCheck = Math.min(0, armorCheck);
-
-            if (IsBroken(equipment,"armor",armorID))
-            {
-              let brokenPenalty = 0;
-              switch (armorType)
-              {
-                default:
-                  break;
-                case "light":
-                  brokenPenalty = -1;
-                  break;
-                case "medium":
-                  brokenPenalty = -2;
-                  break;
-                case "heavy":
-                  brokenPenalty = -3;
-                  break;
-              }
-              modAC.penalty_status = Math.min(modAC.penalty_status, brokenPenalty);
-            }
-          }
-
-          proficiencyBonus = SafeNum(baseValues["bonus_armor_"+armorType]);
-
-          if (isWieldingShield && equipment[rID("shield",shieldID,"carry_state")] == "carried")
-          {
-            proficiencyBonus = Math.min(proficiencyBonus, SafeNum(baseValues["bonus_armor_shields"]));
-
-            shieldCheck = SafeNum(equipment[rID("shield",shieldID,"check_penalty")]);
-
-            let quality = equipment[rID("shield",armorID,"quality")];
-            switch (quality) {
-              case "poor":
-                shieldCheck -= 2;
-                break;
-              case "standard":
-                break;
-              case "expert":
-                shieldCheck += 1;
-                break;
-              case "master":
-                shieldCheck += 2;
-                break;
-              case "legendary":
-                shieldCheck += 3;
-                break;
-            }
-            shieldCheck = Math.min(0, shieldCheck);
-
-            if (!IsBroken(equipment, "shield", shieldID))
-            {
-              if (isShieldRaised)
-              {
-                modAC.bonus_circumstance = Math.max(modAC.bonus_circumstance, SafeNum(equipment[rID("shield",shieldID,"bonus_ac")]));
-              }
-              hardness = SafeNum(equipment[rID("shield",shieldID,"hardness")]);
-            }
-          }
-
-          let ac = 10 + dexBonus + proficiencyBonus +
-            Math.max(0,modAC.bonus_status) + Math.max(0,modAC.bonus_circumstance) + Math.max(0,modAC.bonus_item) +
-            Math.min(0,modAC.penalty_status) + Math.min(0,modAC.penalty_circumstance) + Math.min(0,modAC.penalty_item) +
-            modAC.untyped;
-          if (modAC.min) { ac = Math.min(ac, modAC.min); }
-          if (modAC.max) { ac = Math.max(ac, modAC.max); }
-
-          let checkPenalty = armorCheck + shieldCheck;
-          let modCheckPenalty = NewAdjustmentTracker();
-          AddAdjustmentMods("check_penalty", adjustments, modCheckPenalty);
-          if (modCheckPenalty.min) { checkPenalty = Math.min(checkPenalty, modCheckPenalty.min); }
-          if (modCheckPenalty.max) { checkPenalty = Math.max(checkPenalty, modCheckPenalty.max); }
-          checkPenalty = checkPenalty + modCheckPenalty.untyped +
-            Math.max(0,modCheckPenalty.bonus_status) + Math.max(0,modCheckPenalty.bonus_circumstance) + Math.max(0,modCheckPenalty.bonus_item) +
-            Math.min(0,modCheckPenalty.penalty_status) + Math.min(0,modCheckPenalty.penalty_circumstance) + Math.min(0,modCheckPenalty.penalty_item);
-          
-          let attributes = {
-            ac: ac,
-            hardness: hardness,
-            armor_save_bonus: saveBonus,
-            armor_dex_cap: dexCap,
-            armor_clumsy: isClumsy,
-            armor_noisy: isNoisy,
-            armor_check_penalty: checkPenalty,
-            armor_speed_penalty: speedPenalty
-          };
-          setAttrs(attributes);
-        });
+        let checkPenalty = armorCheck + shieldCheck;
+        let modCheckPenalty = NewAdjustmentTracker();
+        AddAdjustmentMods("check_penalty", adjustments, modCheckPenalty);
+        if (modCheckPenalty.min) { checkPenalty = Math.min(checkPenalty, modCheckPenalty.min); }
+        if (modCheckPenalty.max) { checkPenalty = Math.max(checkPenalty, modCheckPenalty.max); }
+        checkPenalty = checkPenalty + modCheckPenalty.untyped +
+          Math.max(0,modCheckPenalty.bonus_status) + Math.max(0,modCheckPenalty.bonus_circumstance) + Math.max(0,modCheckPenalty.bonus_item) +
+          Math.min(0,modCheckPenalty.penalty_status) + Math.min(0,modCheckPenalty.penalty_circumstance) + Math.min(0,modCheckPenalty.penalty_item);
+        
+        let attributes = {
+          ac: ac,
+          hardness: hardness,
+          armor_save_bonus: saveBonus,
+          armor_dex_cap: dexCap,
+          armor_clumsy: isClumsy,
+          armor_noisy: isNoisy,
+          armor_check_penalty: checkPenalty,
+          armor_speed_penalty: speedPenalty
+        };
+        setAttrs(attributes);
       });
     });
   });
