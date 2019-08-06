@@ -1,7 +1,7 @@
 # Pathfinder 2e - Unchained Sheet
 A custom Pathfinder Second Edition character sheet for Roll20.
 
-I built this sheet for my Twitch show, Third Action. The primary purpose was initially to build a sheet that includes health bars (to easily track HP on the stream), but... I kinda' got carried away. Now my goal is to make it into a decent alternative for people who aren't fond of the default Roll20 sheet.
+I built this sheet for my Twitch show, Third Action (www.twitch.tv/thirdcation). The primary purpose was initially to build a sheet that includes health bars (to easily track HP on the stream), but... I kinda' got carried away. Now my goal is to make it into a decent alternative for people who want a slightly different user experience than what the default Roll20 sheet offers. :)
 
 Pathfinder 2E only just came out for real, and I'm still slowly working through updating the sheet to match the new rules. As such, there are probably lots of random small things that are broken. Feel free to make pull requests or note bugs or feature suggestions--I'll try to make improvements as quickly as I can. :)
 
