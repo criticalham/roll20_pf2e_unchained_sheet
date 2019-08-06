@@ -629,6 +629,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_str_score_change"/>
+                  <input type="hidden" value="10" name="attr_str_score"/>
                   <span><span name="attr_str_score"></span>
                   (<input name="attr_str_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_str_mod"></span>)</span>
                 </div>
@@ -695,6 +696,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_dex_score_change"/>
+                  <input type="hidden" value="10" name="attr_dex_score"/>
                   <span><span name="attr_dex_score"></span>
                   (<input name="attr_dex_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_dex_mod"></span>)</span>
                 </div>
@@ -877,6 +879,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_con_score_change"/>
+                  <input type="hidden" value="10" name="attr_con_score"/>
                   <span><span name="attr_con_score"></span>
                   (<input name="attr_con_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_con_mod"></span>)</span>
                 </div>
@@ -942,6 +945,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_int_score_change"/>
+                  <input type="hidden" value="10" name="attr_int_score"/>
                   <span><span name="attr_int_score"></span>
                   (<input name="attr_int_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_int_mod"></span>)</span>
                 </div>
@@ -1204,6 +1208,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_wis_score_change"/>
+                  <input type="hidden" value="10" name="attr_wis_score"/>
                   <span><span name="attr_wis_score"></span>
                   (<input name="attr_wis_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_wis_mod"></span>)</span>
                 </div>
@@ -1464,6 +1469,7 @@
               <div class="sheet-ability-score">
                 <div>
                   <input type="hidden" class="sheet-change-next" value="0" name="attr_cha_score_change"/>
+                  <input type="hidden" value="10" name="attr_cha_score"/>
                   <span><span name="attr_cha_score"></span>
                   (<input name="attr_cha_mod_sign" class="sheet-append-sign" value="1" type="hidden"/><span name="attr_cha_mod"></span>)</span>
                 </div>
@@ -18623,6 +18629,9 @@ function WatchHP() {
         let hasToughness = SafeNum(values.has_toughness) > 0;
         let hpToughness = hasToughness ? level : 0;
 
+        console.log("---------------------------- PART 1");
+        console.log(values);
+
         let hpMax = hpAncestry + ((hpClass + hpConMod) * level) + hpBonus + hpToughness;
         let hpOriginalMax = hpMax;
 
@@ -18640,10 +18649,14 @@ function WatchHP() {
           hp_max: hpMax,
           hp_temp_max: hpMax,
           hp_effective: hpNewCurrent + hpTemp,
-          hp_percent: Math.min(100, Math.max(0, Math.floor((hpNewCurrent / hpTotal) * 100))),
-          hp_temp_percent: Math.min(100, Math.max(0, Math.floor((hpTemp / hpTotal) * 100))),
-          hp_missing_percent: Math.min(100, Math.max(0, Math.floor(((hpMax - (hpNewCurrent + hpTemp)) / hpTotal) * 100)))
+          hp_percent: SafeNum(Math.min(100, Math.max(0, Math.floor((hpNewCurrent / hpTotal) * 100)))),
+          hp_temp_percent: SafeNum(Math.min(100, Math.max(0, Math.floor((hpTemp / hpTotal) * 100)))),
+          hp_missing_percent: SafeNum(Math.min(100, Math.max(0, Math.floor(((hpMax - (hpNewCurrent + hpTemp)) / hpTotal) * 100))))
         };
+
+        console.log("---------------------------- HP CHECK");
+        console.log(attributes);
+
         setAttrs(attributes);
       });
     });
