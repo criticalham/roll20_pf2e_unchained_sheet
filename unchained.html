@@ -2291,27 +2291,14 @@
               <div class="sheet-table-toggle">
                 <label>
                   <input type="checkbox" name="attr_option_showPowers" value="1"/>
-                  <div class="sheet-table-header">Power Caster</div>
+                  <div class="sheet-table-header">Focus Spell Caster</div>
                 </label>
               </div>
               <div class="sheet-powers-section">
                 <div class="sheet-table-slots sheet-table-spontaneous-slots">
                   <div class="sheet-table-slot sheet-table-slot-power">
-                    <div class="sheet-table-slot-label">Spell Point Stat</div>
-                    <div class="sheet-table-slot-value">
-                      <select name="attr_base_sp_stat">
-                        <option value="str_mod">STR</option>
-                        <option value="dex_mod">DEX</option>
-                        <option value="con_mod">CON</option>
-                        <option value="int_mod">INT</option>
-                        <option value="wis_mod">WIS</option>
-                        <option value="cha_mod" selected>CHA</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="sheet-table-slot sheet-table-slot-power">
-                    <div class="sheet-table-slot-label">Bonus Spell Points</div>
-                    <div class="sheet-table-slot-value"><input type="number" value="0" name="attr_base_sp_bonus"/></div>
+                    <div class="sheet-table-slot-label">Total Focus Points</div>
+                    <div class="sheet-table-slot-value"><input type="number" value="1" name="attr_fp_max"/></div>
                   </div>
                 </div>
               </div>
@@ -7173,9 +7160,9 @@
         </div>
         <div class="sheet-spell-slot-table sheet-casting-section sheet-powers-section">
           <div class="sheet-spell-level sheet-spell-points-entry">
-            <span class="sheet-spell-level-name">Spell Points</span>
-            <input name="attr_sp" class="sheet-spell-level-current" type="number" value="0" />
-            <span class="sheet-spell-level-separator">/<span name="attr_sp_max" class="sheet-spell-level-max">0</span></span>
+            <span class="sheet-spell-level-name">Focus Points</span>
+            <input name="attr_fp" class="sheet-spell-level-current" type="number" value="1" />
+            <span class="sheet-spell-level-separator">/<span name="attr_fp_max" class="sheet-spell-level-max">0</span></span>
           </div>
         </div>
         <div class="sheet-section-title sheet-casting-section sheet-spontaneous-section">
@@ -18653,18 +18640,6 @@ function WatchHP() {
   });
 }
 
-function WatchSP() {
-  on("change:base_sp_bonus change:base_sp_stat" +
-    " change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod", function () {
-    getAttrs(["base_sp_stat"], function (prevalues) {
-      getAttrs(["base_sp_bonus", prevalues.base_sp_stat], function (values) {
-        let bonus = SafeNum(values.base_sp_bonus);
-        setAttrs({sp_max: bonus + RetrieveMod(values)});
-      });
-    });
-  });
-}
-
 function WatchReagents() {
   on("change:base_reagent_bonus change:base_reagent_stat" +
     " change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod", function () {
@@ -19571,7 +19546,6 @@ WatchModPropertyCount();
 WatchSpeeds();
 
 WatchHP();
-WatchSP();
 WatchReagents();
 WatchArmorClass();
 
