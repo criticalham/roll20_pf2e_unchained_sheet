@@ -1704,7 +1704,7 @@
           <div class="sheet-underline-col sheet-i-level sheet-u-col2">
             <div class="sheet-underline-label">Level</div>
             <span class="sheet-level-value sheet-underline-level-value">
-              <span class="sheet-underline-display" name="attr_level">1</span>
+              <span class="sheet-underline-display" name="attr_level" value="1">1</span>
             </span>
             <div class="sheet-underline-label">EXP</div>
             <span class="sheet-level-value sheet-underline-exp-value">
@@ -1749,7 +1749,7 @@
         <div class="sheet-table sheet-table-class">
           <div>
             <span class="sheet-table-level-label">Level</span>
-            <select class="sheet-table-level-option" name="attr_level">
+            <select class="sheet-table-level-option" name="attr_level" value="1">
               <option value="0">0</option>
               <option value="1" selected>1</option>
               <option value="2">2</option>
@@ -2008,7 +2008,7 @@
                     </select>
                   </div>
                 </div>
-                <input type="hidden" name="attr_level" class="sheet-show-by-level"/>
+                <input type="hidden" name="attr_level" class="sheet-show-by-level" value="1"/>
                 <div class="sheet-boost-row sheet-show-level1">
                   <div class="sheet-boost-label">
                     Level 1
@@ -18622,15 +18622,15 @@ function WatchHP() {
     " change:con_score change:base_hp_bonus change:has_toughness change:base_hp_toughness" + GetWatchedModVariables(), function () {
     GetAdjustments(function (adjustments) {
       getAttrs(["level", "hp", "hp_temp", "base_hp_ancestry", "base_hp_class", "base_hp_bonus", "has_toughness", "con_score"], function (values) {
-        let level = +(values.level);
-        let hpTemp = +(values.hp_temp);
-        let hpAncestry = +(values.base_hp_ancestry);
-        let hpClass = +(values.base_hp_class);
-        let hpBonus = +(values.base_hp_bonus);
-        let hpCurrent = +(values.hp);
+        let level = SafeNum(values.level);
+        let hpTemp = SafeNum(values.hp_temp);
+        let hpAncestry = SafeNum(values.base_hp_ancestry);
+        let hpClass = SafeNum(values.base_hp_class);
+        let hpBonus = SafeNum(values.base_hp_bonus);
+        let hpCurrent = SafeNum(values.hp);
         let hpConMod = CalculateMod(values.con_score);
 
-        let hasToughness = +(values.has_toughness) > 0;
+        let hasToughness = SafeNum(values.has_toughness) > 0;
         let hpToughness = hasToughness ? level : 0;
 
         let hpMax = hpAncestry + ((hpClass + hpConMod) * level) + hpBonus + hpToughness;
@@ -18665,7 +18665,7 @@ function WatchSP() {
     " change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod", function () {
     getAttrs(["base_sp_stat"], function (prevalues) {
       getAttrs(["base_sp_bonus", prevalues.base_sp_stat], function (values) {
-        let bonus = +(values.base_sp_bonus);
+        let bonus = SafeNum(values.base_sp_bonus);
         setAttrs({sp_max: bonus + RetrieveMod(values)});
       });
     });
@@ -18677,7 +18677,7 @@ function WatchReagents() {
     " change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod", function () {
     getAttrs(["base_reagent_stat"], function (prevalues) {
       getAttrs(["base_reagent_bonus", prevalues.base_reagent_stat], function (values) {
-        let bonus = +(values.base_reagent_bonus);
+        let bonus = SafeNum(values.base_reagent_bonus);
         setAttrs({reagent_max: bonus + RetrieveMod(values)});
       });
     });
@@ -18942,7 +18942,7 @@ function WatchDentCap(sectionType)
 {
   on("change:repeating_"+sectionType+":dent_cap", function (eventInfo) {
     getAttrs(["repeating_"+sectionType+"_dent_cap"], function (values) {
-      let maxDents = +(values["repeating_"+sectionType+"_dent_cap"]);
+      let maxDents = SafeNum(values["repeating_"+sectionType+"_dent_cap"]);
       let attributes = {};
       for (let i = 1; i <= 6; ++i)
       {
@@ -19001,15 +19001,15 @@ function ListAllVariables(sectionType, sectionIDs, variableNames) {
 }
 
 function GetCoinBulk(data) {
-  let platinum = +(data.platinum);
-  let gold = +(data.gold);
-  let silver = +(data.silver);
-  let copper = +(data.copper);
+  let platinum = SafeNum(data.platinum);
+  let gold = SafeNum(data.gold);
+  let silver = SafeNum(data.silver);
+  let copper = SafeNum(data.copper);
   let totalBulk = Math.floor((platinum + gold + silver + copper) / 1000);
 
   if (data.option_showReagents)
   {
-    let reagents = +(data.reagent);
+    let reagents = SafeNum(data.reagent);
     totalBulk += Math.floor(reagents / 10) * 0.1;
   }
 
@@ -19020,7 +19020,7 @@ function ComputeBulk(value) {
   {
     case "L/10": return 0.01;
     case "L": return 0.1;
-    default: return +(value);
+    default: return SafeNum(value);
   }
 }
 function GetItemBulk(data, categoryType, categoryIDs, totalBulk) {
@@ -19031,7 +19031,7 @@ function GetItemBulk(data, categoryType, categoryIDs, totalBulk) {
     let bulk = ComputeBulk(data[prefix+"bulk"]);
     if (categoryType == "item")
     {
-      let quantity = +(data[prefix+"quantity"]);
+      let quantity = SafeNum(data[prefix+"quantity"]);
       bulk = bulk * quantity;
     }
     switch (state)
@@ -19049,7 +19049,7 @@ function GetItemBulk(data, categoryType, categoryIDs, totalBulk) {
 
     if (categoryType == "weapon" && data[prefix+"option_ammo"])
     {
-      let ammoQuantity = +(data[prefix+"ammo"]);
+      let ammoQuantity = SafeNum(data[prefix+"ammo"]);
       let ammoBulkPer10 = ComputeBulk(data[prefix+"ammo_bulk"]);
       let ammoBulk = (ammoQuantity / 10) * ammoBulkPer10;
       switch (state)
@@ -19068,7 +19068,7 @@ function GetItemBulk(data, categoryType, categoryIDs, totalBulk) {
 
     if (categoryType == "item" && data[prefix+"option_capacity"])
     {
-      let capacity = +(data[prefix+"capacity"]);
+      let capacity = SafeNum(data[prefix+"capacity"]);
       if (data[prefix+"option_capacity_extra"]) { totalBulk.extra_capacity += capacity; }
       else { totalBulk.capacity += capacity; }
     }
@@ -19098,7 +19098,7 @@ function UpdateInventoryStats(weaponIDs, armorIDs, shieldIDs, itemIDs) {
     totalBulk.extra_stored = Math.min(totalBulk.extra_capacity, totalBulk.stored);
     totalBulk.stored -= totalBulk.extra_stored;
 
-    let str = +(data.str_mod);
+    let str = SafeNum(data.str_mod);
     let totalCarried = Math.floor(totalBulk.carried + totalBulk.stored);
     let bulkStatus = "normal";
     let isInventoryEncumbered = 0;
@@ -19227,7 +19227,7 @@ function IsBroken(equipment, sectionType, sectionID)
   let dentsTaken = 0;
   for (let i = 1; i <= maxDents; ++i)
   {
-    let dent = +(equipment[rID(sectionType, sectionID, "dent_"+i)]);
+    let dent = SafeNum(equipment[rID(sectionType, sectionID, "dent_"+i)]);
     if (dent)
     {
       ++dentsTaken;
@@ -19268,7 +19268,7 @@ function WatchArmorClass() {
       ], function (baseValues) {
         let variables = [];
 
-        let isWearingArmor = +(baseValues.equipped_armor_status) > 0;
+        let isWearingArmor = SafeNum(baseValues.equipped_armor_status) > 0;
         let armorID = baseValues.equipped_armor_id;
         if (isWearingArmor) {
           variables = variables.concat(ListVariables("armor", armorID, [
@@ -19280,8 +19280,8 @@ function WatchArmorClass() {
           ]));
         }
 
-        let isWieldingShield = baseValues.option_shield && +(baseValues.equipped_armor_status) > 0;
-        let isShieldRaised = isWieldingShield && +(baseValues.shield_raised);
+        let isWieldingShield = baseValues.option_shield && SafeNum(baseValues.equipped_armor_status) > 0;
+        let isShieldRaised = isWieldingShield && SafeNum(baseValues.shield_raised);
         let shieldID = baseValues.equipped_shield_id;
         if (isWieldingShield) {
           variables = variables.concat(ListVariables("shield", shieldID, [
@@ -19291,7 +19291,7 @@ function WatchArmorClass() {
         }
 
         getAttrs(variables, function (equipment) {
-          let dexBonus = +(baseValues.dex_mod);
+          let dexBonus = SafeNum(baseValues.dex_mod);
           let proficiencyBonus = 0;
           let armorType = "unarmored";
           let hardness = 0;
@@ -19376,11 +19376,11 @@ function WatchArmorClass() {
             }
           }
 
-          proficiencyBonus = +(baseValues["bonus_armor_"+armorType]);
+          proficiencyBonus = SafeNum(baseValues["bonus_armor_"+armorType]);
 
           if (isWieldingShield && equipment[rID("shield",shieldID,"carry_state")] == "carried")
           {
-            proficiencyBonus = Math.min(proficiencyBonus, +(baseValues["bonus_armor_shields"]));
+            proficiencyBonus = Math.min(proficiencyBonus, SafeNum(baseValues["bonus_armor_shields"]));
 
             shieldCheck = SafeNum(equipment[rID("shield",shieldID,"check_penalty")]);
 
