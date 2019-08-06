@@ -2898,7 +2898,7 @@ select.sheet-spell-component-dropdown {
 .sheet-page input[type="checkbox"].sheet-action-visibility-checkbox:not(:checked) ~ div .sheet-action-block-name {
   border-bottom: none;
 }
-.sheet-page input.sheet-max-charge-count[value="0"] ~ .sheet-action-block-name {
+.sheet-page input[type="checkbox"].sheet-action-visibility-checkbox:not(:checked) ~ div input.sheet-max-charge-count[value="0"] ~ .sheet-action-block-name {
   margin-bottom: -5px;
 }
 .sheet-page .sheet-formula-subcategory {
