@@ -6432,12 +6432,12 @@
             </div>
             <div class="sheet-action-block-details">
               <p>Opening a lock without a key is very similar to Disabling a Device, but the DC of the check is determined by the complexity and construction of the lock you are attempting to pick. Unlocking even the simplest of mechanisms almost always
-              requires three or more successful checks to accomplish. If you lack the proper tools, the GM might let you used improvised picks, which are treated as poor-quality tools.</p>
+              requires three or more successful checks to accomplish. If you lack the proper tools, the GM might let you used improvised picks, which are treated as shoddy-quality tools.</p>
             </div>
             <div class="sheet-action-block-results">
               <div class="sheet-action-result-s">You gain one success toward opening the lock.</div>
               <div class="sheet-action-result-cs">You gain two successes toward opening the lock.</div>
-              <div class="sheet-action-result-cf">You either undo one success you have already gained, or, if you have no successes, you break your tools. The tools can be used while broken, but are treated as poor quality tools. Repairing them requires replacing the tools (costing 6 sp,
+              <div class="sheet-action-result-cf">You either undo one success you have already gained, or, if you have no successes, you break your tools. The tools can be used while broken, but are treated as shoddy quality tools. Repairing them requires replacing the tools (costing 6 sp,
               or 50 sp for expert-quality thieves’ tools).</div>
             </div>
           </div>
@@ -15906,7 +15906,6 @@
                                   <option value="1">+1</option>
                                   <option value="2">+2</option>
                                   <option value="3">+3</option>
-                                  <option value="4">+4</option>
                                 </select>
                               </div>
                             </div>
@@ -15914,11 +15913,8 @@
                               <span>Quality</span>
                               <div>
                                 <select name="attr_quality" value="standard">
-                                  <option value="poor">Poor</option>
+                                  <option value="shoddy">Shoddy</option>
                                   <option value="standard" selected>Standard</option>
-                                  <option value="expert">Expert</option>
-                                  <option value="master">Master</option>
-                                  <option value="legendary">Legendary</option>
                                 </select>
                               </div>
                             </div>
@@ -16454,17 +16450,13 @@
                                 <option value="1">+1</option>
                                 <option value="2">+2</option>
                                 <option value="3">+3</option>
-                                <option value="4">+4</option>
                               </select>
                             </div>
                             <div class="sheet-item-property-entry">
                               <span>Quality</span>
                               <select name="attr_quality" value="standard">
-                                <option value="poor">Poor</option>
+                                <option value="shoddy">Shoddy</option>
                                 <option value="standard" selected>Standard</option>
-                                <option value="expert">Expert</option>
-                                <option value="master">Master</option>
-                                <option value="legendary">Legendary</option>
                               </select>
                             </div>
                             <div class="sheet-item-property-entry">
@@ -16500,11 +16492,11 @@
                             </div>
                             <div class="sheet-item-property-entry">
                               <span>Check Penalty</span>
-                              <input name="attr_check_penalty" type="number" value="0"/>
+                              <input name="attr_check_penalty" type="number" value="0" max="0"/>
                             </div>
                             <div class="sheet-item-property-entry">
                               <span>Speed Penalty</span>
-                              <input name="attr_speed_penalty" type="number" value="0"/>
+                              <input name="attr_speed_penalty" type="number" value="0" max="0"/>
                             </div>
                           </span>
                         </span>
@@ -16660,11 +16652,8 @@
                             <div class="sheet-item-property-entry">
                               <span>Quality</span>
                               <select name="attr_quality" value="standard">
-                                <option value="poor"> Poor</option>
+                                <option value="shoddy"> Shoddy</option>
                                 <option value="standard" selected>Standard</option>
-                                <option value="expert"> Expert</option>
-                                <option value="master"> Master</option>
-                                <option value="legendary"> Legendary</option>
                               </select>
                             </div>
                             <div class="sheet-item-property-entry">
@@ -16688,8 +16677,8 @@
                               <input name="attr_bonus_ac" type="number" value="0"/>
                             </div>
                             <div class="sheet-item-property-entry">
-                              <span>Check Penalty</span>
-                              <input name="attr_check_penalty" type="number" value="0"/>
+                              <span>Speed Penalty</span>
+                              <input name="attr_speed_penalty" type="number" value="0" max="0"/>
                             </div>
                           </span>
                         </span>
@@ -16701,7 +16690,7 @@
                     <div class="sheet-action-visibility-display"><span class="sheet-collapse-icon">4</span></div>
                     <div class="sheet-editable-interior">
                       <div class="sheet-action-block-name sheet-weapon-block-name">
-                        <button class="sheet-custom-action-button" type="roll" name="roll_ShieldDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=@{quality} shield}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{maxDents=@{dent_cap}}} {{checkPenalty=@{check_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
+                        <button class="sheet-custom-action-button" type="roll" name="roll_ShieldDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=@{quality} shield}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{maxDents=@{dent_cap}}} {{speedPenalty=@{speed_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
                           <span class="sheet-action-entry-name" name="attr_name">Shield Name</span>
                         </button>
                         <div class="sheet-item-equip-state">
@@ -16731,7 +16720,7 @@
                         </div>
                         <div class="sheet-property-line">
                           •
-                          <span name="attr_check_penalty">0</span> check penalty
+                          -<span name="attr_speed_penalty">0</span> ft speed penalty
                         </div>
                         <div class="sheet-action-block-details">
                           <p><span class="sheet-multiline" name="attr_description"></span></p>
@@ -17692,17 +17681,8 @@ function SetWeaponRollCalculations(sectionID, adjustments)
     let qualityBonus = potency;
     let qualityPenalty = 0;
     switch (quality) {
-      case "poor":
+      case "shoddy":
         qualityPenalty = -2;
-        break;
-      case "expert":
-        qualityBonus = Math.max(qualityBonus, 1);
-        break;
-      case "master":
-        qualityBonus = Math.max(qualityBonus, 2);
-        break;
-      case "legendary":
-        qualityBonus = Math.max(qualityBonus, 3);
         break;
     }
 
@@ -19258,7 +19238,7 @@ function UpdateArmorClass() {
       let shieldID = baseValues.equipped_shield_id;
       if (isWieldingShield) {
         variables = variables.concat(ListVariables("shield", shieldID, [
-          "bonus_ac", "quality", "carry_state", "hardness",
+          "bonus_ac", "quality", "carry_state", "hardness", "speed_penalty",
           "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
         ]));
       }
@@ -19275,7 +19255,6 @@ function UpdateArmorClass() {
         let saveBonus = 0;
         let armorCheck = 0;
         let speedPenalty = 0;
-        let shieldCheck = 0;
         let isClumsy = 0;
         let isNoisy = 0;
         let dexCap = -1;
@@ -19310,7 +19289,7 @@ function UpdateArmorClass() {
 
           let quality = equipment[rID("armor",armorID,"quality")];
           switch (quality) {
-            case "poor":
+            case "shoddy":
               modAC.bonus_item -= 2;
               armorCheck -= 2;
               break;
@@ -19342,21 +19321,20 @@ function UpdateArmorClass() {
 
         if (isWieldingShield && equipment[rID("shield",shieldID,"carry_state")] == "carried")
         {
-          shieldCheck = 0;
-
-          let quality = equipment[rID("shield",armorID,"quality")];
-          switch (quality) {
-            case "poor":
-              shieldCheck -= 2;
-              break;
-          }
-          shieldCheck = Math.min(0, shieldCheck);
+          speedPenalty += Math.min(0, SafeNum(equipment[rID("shield",shieldID,"speed_penalty")]));
 
           if (!IsBroken(equipment, "shield", shieldID))
           {
             if (isShieldRaised)
             {
               modAC.bonus_circumstance = Math.max(modAC.bonus_circumstance, SafeNum(equipment[rID("shield",shieldID,"bonus_ac")]));
+
+              let quality = equipment[rID("shield",shieldID,"quality")];
+              switch (quality) {
+                case "shoddy":
+                  modAC.bonus_circumstance = Math.max(0, modAC.bonus_circumstance - 2);
+                  break;
+              }
             }
             hardness = SafeNum(equipment[rID("shield",shieldID,"hardness")]);
           }
@@ -19369,7 +19347,7 @@ function UpdateArmorClass() {
         if (modAC.min) { ac = Math.min(ac, modAC.min); }
         if (modAC.max) { ac = Math.max(ac, modAC.max); }
 
-        let checkPenalty = armorCheck + shieldCheck;
+        let checkPenalty = armorCheck;
         let modCheckPenalty = NewAdjustmentTracker();
         AddAdjustmentMods("check_penalty", adjustments, modCheckPenalty);
         if (modCheckPenalty.min) { checkPenalty = Math.min(checkPenalty, modCheckPenalty.min); }
