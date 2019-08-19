@@ -3460,6 +3460,7 @@
                 <span name="attr_ac">0</span>
               </div>
             </div>
+            <input type="hidden" name="attr_equipped_shield_status" class="sheet-hide-next-if-zero" value="0"/>
             <div class="sheet-armor-rating sheet-shield-section">
               <div class="sheet-ac-label sheet-shield-label">
                 <div>Raise<br/>Shield</div>
@@ -3471,6 +3472,7 @@
                 </label>
               </div>
             </div>
+            <input type="hidden" name="attr_equipped_shield_status" class="sheet-hide-next-if-zero" value="0"/>
             <div class="sheet-armor-rating sheet-shield-section">
               <div class="sheet-ac-label sheet-shield-label">
                 <div>Hard-<br/>ness</div>
@@ -3478,6 +3480,7 @@
               <div class="sheet-ac-value"><span name="attr_hardness">0</span></div>
             </div>
           </div>
+          <!-- TODO: shield hp -->
           <div class="sheet-armor-properties-row">
             <div class="sheet-armor-property-label">Weak</div>
             <textarea class="sheet-armor-property-value" type="text" placeholder="N/A" name="attr_weaknesses"></textarea>
@@ -3507,12 +3510,12 @@
             </div>
             <div class="sheet-equipped-entry">
               <input type="hidden" name="attr_equipped_weapon1_id"/>
-              <input type="hidden" name="attr_equipped_weapon1_status" class="sheet-equip-tracker"/>
+              <input type="hidden" name="attr_equipped_weapon1_status" class="sheet-equip-tracker" value="0"/>
               <input class="sheet-equipped-input" type="text" placeholder="weapon name" name="attr_equipped_weapon1"/>
               <div class="sheet-equipped-valid"><span class="sheet-valid-icon">3</span></div>
               <div class="sheet-equipped-invalid"><span class="sheet-invalid-icon">*</span></div>
             </div>
-            <input type="hidden" name="attr_equipped_weapon1_status" class="sheet-hide-next-if-zero"/>
+            <input type="hidden" name="attr_equipped_weapon1_status" class="sheet-hide-next-if-zero" value="0"/>
             <div class="sheet-equipped-buttons">
               <div class="sheet-equipped-action-label">Strike: </div>
               <input type="hidden" name="attr_equipped_weapon1_roll_1"/>
@@ -3532,12 +3535,12 @@
             </div>
             <div class="sheet-equipped-entry">
               <input type="hidden" name="attr_equipped_weapon2_id"/>
-              <input type="hidden" name="attr_equipped_weapon2_status" class="sheet-equip-tracker"/>
+              <input type="hidden" name="attr_equipped_weapon2_status" class="sheet-equip-tracker" value="0"/>
               <input class="sheet-equipped-input" type="text" placeholder="weapon name" name="attr_equipped_weapon2"/>
               <div class="sheet-equipped-valid"><span class="sheet-valid-icon">3</span></div>
               <div class="sheet-equipped-invalid"><span class="sheet-invalid-icon">*</span></div>
             </div>
-            <input type="hidden" name="attr_equipped_weapon2_status" class="sheet-hide-next-if-zero"/>
+            <input type="hidden" name="attr_equipped_weapon2_status" class="sheet-hide-next-if-zero" value="0"/>
             <div class="sheet-equipped-buttons">
               <div class="sheet-equipped-action-label">Strike: </div>
               <input type="hidden" name="attr_equipped_weapon2_roll_1"/>
@@ -3557,7 +3560,7 @@
             </div>
             <div class="sheet-equipped-entry">
               <input type="hidden" name="attr_equipped_armor_id"/>
-              <input type="hidden" name="attr_equipped_armor_status" class="sheet-equip-tracker"/>
+              <input type="hidden" name="attr_equipped_armor_status" class="sheet-equip-tracker" value="0"/>
               <input class="sheet-equipped-input" type="text" placeholder="armor name" name="attr_equipped_armor"/>
               <div class="sheet-equipped-valid"><span class="sheet-valid-icon">3</span></div>
               <div class="sheet-equipped-invalid"><span class="sheet-invalid-icon">*</span></div>
@@ -3569,7 +3572,7 @@
             </div>
             <div class="sheet-equipped-entry">
               <input type="hidden" name="attr_equipped_shield_id"/>
-              <input type="hidden" name="attr_equipped_shield_status" class="sheet-equip-tracker"/>
+              <input type="hidden" name="attr_equipped_shield_status" class="sheet-equip-tracker" value="0"/>
               <input class="sheet-equipped-input" type="text" placeholder="shield name" name="attr_equipped_shield"/>
               <div class="sheet-equipped-valid"><span class="sheet-valid-icon">3</span></div>
               <div class="sheet-equipped-invalid"><span class="sheet-invalid-icon">*</span></div>
