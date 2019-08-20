@@ -16474,6 +16474,8 @@
                                 <option value="3">+3</option>
                               </select>
                             </div>
+                          </span>
+                          <span class="sheet-action-damage-inputs sheet-item-property-set">
                             <div class="sheet-item-property-entry">
                               <span>AC Bonus</span>
                               <input name="attr_bonus_ac" type="number" value="0"/>
@@ -16487,8 +16489,6 @@
                                 </div>
                               </div>
                             </div>
-                          </span>
-                          <span class="sheet-action-damage-inputs sheet-item-property-set">
                             <div class="sheet-item-property-entry">
                               <span>Check Penalty</span>
                               <input name="attr_check_penalty" type="number" value="0" max="0"/>
@@ -16497,18 +16497,20 @@
                               <span>Speed Penalty</span>
                               <input name="attr_speed_penalty" type="number" value="0" max="0"/>
                             </div>
+                          </span>
+                          <span class="sheet-action-damage-inputs sheet-item-property-set">
                             <div class="sheet-item-property-entry">
                               <span>Hardness</span>
                               <input name="attr_hardness" type="number" value="1"/>
                             </div>
                             <div class="sheet-item-property-entry">
-                              <span>HP</span>
+                              <span>Hit Points</span>
                               <span>
                                 <input name="attr_hp" class="sheet-shield-hp" type="number" value="4"/> / <input name="attr_hp_max" class="sheet-shield-hp" type="number" value="4"/>
                               </span>
                             </div>
                             <div class="sheet-item-property-entry">
-                              <span>BT</span>
+                              <span>Broken Threshold (BT)</span>
                               <input name="attr_bt" type="number" value="2"/>
                             </div>
                           </span>
@@ -17681,13 +17683,13 @@ function SetWeaponRollCalculations(sectionID, adjustments)
       }
 
       let output = baseStatValue + "[prof]" +
-        " +([[" + (totalAdjust.untyped+rollBonus) + "]])[untyped]" +
-        " +([[" + totalAdjust.bonus_status + "]])[+status]" +
-        " +([[" + totalAdjust.bonus_circumstance + "]])[+circ]" +
-        " +([[" + totalAdjust.bonus_item + "]])[+item]" +
-        " +([[" + totalAdjust.penalty_status + "]])[-status]" +
-        " +([[" + totalAdjust.penalty_circumstance + "]])[-circ]" +
-        " +([[" + totalAdjust.penalty_item + "]])[-item]";
+        ((totalAdjust.untyped+rollBonus) != 0 ? " +([[" + (totalAdjust.untyped+rollBonus) + "]])[untyped]" : "") +
+        ((totalAdjust.bonus_status != 0) ? " +([[" + totalAdjust.bonus_status + "]])[+status]" : "" )+
+        ((totalAdjust.bonus_circumstance != 0) ? " +([[" + totalAdjust.bonus_circumstance + "]])[+circ]" : "" )+
+        ((totalAdjust.bonus_item != 0) ? " +([[" + totalAdjust.bonus_item + "]])[+item]" : "" )+
+        ((totalAdjust.penalty_status != 0) ? " +([[" + totalAdjust.penalty_status + "]])[-status]" : "" )+
+        ((totalAdjust.penalty_circumstance != 0) ? " +([[" + totalAdjust.penalty_circumstance + "]])[-circ]" : "" )+
+        ((totalAdjust.penalty_item != 0) ? " +([[" + totalAdjust.penalty_item + "]])[-item]": "" );
 
       // do something about the bonus type
       let attributes = {
