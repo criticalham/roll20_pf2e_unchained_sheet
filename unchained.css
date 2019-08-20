@@ -803,6 +803,22 @@
   align-self: center;
 }
 
+.sheet-page .sheet-break-tag {
+  color: orange;
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  align-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: -5px;
+}
+
+.sheet-page .sheet-break-tag span {
+  align-self: center;
+  text-align: center;
+}
+
 .sheet-page .sheet-equipped-group {
   display: flex;
   flex-direction: column;
@@ -2509,9 +2525,6 @@ select.sheet-spell-component-dropdown {
 }
 .sheet-page .sheet-armor-icon {
   color: #500000;
-}
-.sheet-page .sheet-dent-icon {
-  color: #f0a83d;
 }
 .sheet-page .sheet-dent-checkbox:checked ~ .sheet-armor-icon,
 .sheet-page .sheet-dent-checkbox:not(:checked) ~ .sheet-dent-icon {
