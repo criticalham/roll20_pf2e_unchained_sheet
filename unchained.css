@@ -869,6 +869,23 @@
   margin: 2px;
 }
 
+.sheet-page .sheet-equipped-buttons input.sheet-shield-hp {
+  width: 40px;
+  border: 1px dashed #3b4f5455;
+  border-radius: 5px;
+  height: 25px;
+  text-align: center;
+  box-sizing: border-box;
+  align-self: center;
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.sheet-page .sheet-equipped-buttons span.sheet-shield-hp-label {
+  color: #500000;
+  font-weight: bold;
+}
+
 /*
 .sheet-page button span.sheet-a1,
 .sheet-page button span.sheet-a2,
@@ -2596,6 +2613,9 @@ select.sheet-spell-component-dropdown {
 }
 .sheet-page .sheet-item-property-entry input {
   width: 50px;
+}
+.sheet-page .sheet-item-property-entry input.sheet-shield-hp {
+  width: 40px;
 }
 .sheet-page .sheet-action-block-name .sheet-item-quantity input {
   min-width: 0 !important;

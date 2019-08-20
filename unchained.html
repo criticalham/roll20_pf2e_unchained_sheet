@@ -16447,6 +16447,13 @@
                               </select>
                             </div>
                             <div class="sheet-item-property-entry">
+                              <span>Quality</span>
+                              <select name="attr_quality" value="standard">
+                                <option value="shoddy">Shoddy</option>
+                                <option value="standard" selected>Standard</option>
+                              </select>
+                            </div>
+                            <div class="sheet-item-property-entry">
                               <span>Potency</span>
                               <select name="attr_potency" value="0">
                                 <option value="0">+0</option>
@@ -16455,31 +16462,6 @@
                                 <option value="3">+3</option>
                               </select>
                             </div>
-                            <div class="sheet-item-property-entry">
-                              <span>Quality</span>
-                              <select name="attr_quality" value="standard">
-                                <option value="shoddy">Shoddy</option>
-                                <option value="standard" selected>Standard</option>
-                              </select>
-                            </div>
-                            <div class="sheet-item-property-entry">
-                              <span>Hardness</span>
-                              <input name="attr_hardness" type="number" value="0"/>
-                            </div>
-                            <div class="sheet-item-property-entry">
-                              <span>Max Dents</span>
-                              <select name="attr_dent_cap" value="2">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2" selected>2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                              </select>
-                            </div>
-                          </span>
-                          <span class="sheet-action-damage-inputs sheet-item-property-set">
                             <div class="sheet-item-property-entry">
                               <span>AC Bonus</span>
                               <input name="attr_bonus_ac" type="number" value="0"/>
@@ -16493,6 +16475,8 @@
                                 </div>
                               </div>
                             </div>
+                          </span>
+                          <span class="sheet-action-damage-inputs sheet-item-property-set">
                             <div class="sheet-item-property-entry">
                               <span>Check Penalty</span>
                               <input name="attr_check_penalty" type="number" value="0" max="0"/>
@@ -16500,6 +16484,20 @@
                             <div class="sheet-item-property-entry">
                               <span>Speed Penalty</span>
                               <input name="attr_speed_penalty" type="number" value="0" max="0"/>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>Hardness</span>
+                              <input name="attr_hardness" type="number" value="1"/>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>HP</span>
+                              <span>
+                                <input name="attr_hp" class="sheet-shield-hp" type="number" value="4"/> / <input name="attr_hp_max" class="sheet-shield-hp" type="number" value="4"/>
+                              </span>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>BT</span>
+                              <input name="attr_bt" type="number" value="2"/>
                             </div>
                           </span>
                         </span>
@@ -16521,7 +16519,7 @@
                     <div class="sheet-action-visibility-display"><span class="sheet-collapse-icon">4</span></div>
                     <div class="sheet-editable-interior">
                       <div class="sheet-action-block-name sheet-weapon-block-name">
-                        <button class="sheet-custom-action-button" type="roll" name="roll_ArmorDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=+@{potency} @{quality} @{proficiency} armor}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{maxDents=@{dent_cap}}} {{hasMaxDex=[[@{option_max_dex}]]}} {{maxDex=@{max_dex}}} {{hasClumsy=[[@{atrait_clumsy}]]}} {{hasFragile=[[@{atrait_fragile}]]}} {{hasNoisy=[[@{atrait_noisy}]]}} {{checkPenalty=@{check_penalty}}} {{speedPenalty=@{speed_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
+                        <button class="sheet-custom-action-button" type="roll" name="roll_ArmorDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=+@{potency} @{quality} @{proficiency} armor}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{hasMaxDex=[[@{option_max_dex}]]}} {{maxDex=@{max_dex}}} {{hasClumsy=[[@{atrait_clumsy}]]}} {{hasFragile=[[@{atrait_fragile}]]}} {{hasNoisy=[[@{atrait_noisy}]]}} {{checkPenalty=@{check_penalty}}} {{speedPenalty=@{speed_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
                           <span class="sheet-action-entry-name" name="attr_name">Armor Name</span>
                         </button>
                         <div class="sheet-item-equip-state">
@@ -16582,30 +16580,8 @@
                       <div class="sheet-equipped-buttons">
                         <div class="sheet-equipped-action-label">Hardness:</div>
                         <span class="sheet-item-hardness" name="attr_hardness">10</span>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_1" value="1"/>
-                        <label>
-                          <input name="attr_dent_1" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_2" value="1"/>
-                        <label>
-                          <input name="attr_dent_2" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_3" value="0"/>
-                        <label>
-                          <input name="attr_dent_3" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_4" value="0"/>
-                        <label>
-                          <input name="attr_dent_4" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_5" value="0"/>
-                        <label>
-                          <input name="attr_dent_5" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_6" value="0"/>
-                        <label>
-                          <input name="attr_dent_6" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
+                        <input class="sheet-shield-hp" type="number" name="attr_hp"/>
+                        <span class="sheet-shield-hp-label">/ <span name="attr_hp_max"></span> HP (<span name="attr_bt"></span> BT)</span>
                       </div>
                     </div>
                   </div>
@@ -16655,24 +16631,8 @@
                             <div class="sheet-item-property-entry">
                               <span>Quality</span>
                               <select name="attr_quality" value="standard">
-                                <option value="shoddy"> Shoddy</option>
+                                <option value="shoddy">Shoddy</option>
                                 <option value="standard" selected>Standard</option>
-                              </select>
-                            </div>
-                            <div class="sheet-item-property-entry">
-                              <span>Hardness</span>
-                              <input name="attr_hardness" type="number" value="3"/>
-                            </div>
-                            <div class="sheet-item-property-entry">
-                              <span>Max Dents</span>
-                              <select name="attr_dent_cap" value="2">
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2" selected>2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
                               </select>
                             </div>
                             <div class="sheet-item-property-entry">
@@ -16682,6 +16642,20 @@
                             <div class="sheet-item-property-entry">
                               <span>Speed Penalty</span>
                               <input name="attr_speed_penalty" type="number" value="0" max="0"/>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>Hardness</span>
+                              <input name="attr_hardness" type="number" value="3"/>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>HP</span>
+                              <span>
+                                <input name="attr_hp" class="sheet-shield-hp" type="number" value="6"/> / <input name="attr_hp_max" class="sheet-shield-hp" type="number" value="6"/>
+                              </span>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>BT</span>
+                              <input name="attr_bt" type="number" value="3"/>
                             </div>
                           </span>
                         </span>
@@ -16693,7 +16667,7 @@
                     <div class="sheet-action-visibility-display"><span class="sheet-collapse-icon">4</span></div>
                     <div class="sheet-editable-interior">
                       <div class="sheet-action-block-name sheet-weapon-block-name">
-                        <button class="sheet-custom-action-button" type="roll" name="roll_ShieldDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=@{quality} shield}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{maxDents=@{dent_cap}}} {{speedPenalty=@{speed_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
+                        <button class="sheet-custom-action-button" type="roll" name="roll_ShieldDetails" value="@{roll_privacy} &{template:action} {{character=@{character_name}}} {{title=@{name}}} {{subtitle=@{quality} shield}} {{tags=@{traits}}} {{hasArmorProperties=[[1]]}} {{ac=@{bonus_ac}}} {{speedPenalty=@{speed_penalty}}} {{hardness=@{hardness}}} {{bulk=@{bulk}}} {{description=@{description}}}">
                           <span class="sheet-action-entry-name" name="attr_name">Shield Name</span>
                         </button>
                         <div class="sheet-item-equip-state">
@@ -16732,30 +16706,8 @@
                       <div class="sheet-equipped-buttons">
                         <div class="sheet-equipped-action-label">Hardness:</div>
                         <span class="sheet-item-hardness" name="attr_hardness">10</span>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_1" value="1"/>
-                        <label>
-                          <input name="attr_dent_1" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_2" value="1"/>
-                        <label>
-                          <input name="attr_dent_2" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_3" value="0"/>
-                        <label>
-                          <input name="attr_dent_3" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_4" value="0"/>
-                        <label>
-                          <input name="attr_dent_4" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_5" value="0"/>
-                        <label>
-                          <input name="attr_dent_5" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
-                        <input type="hidden" class="sheet-hide-next-if-zero" name="attr_option_dent_6" value="0"/>
-                        <label>
-                          <input name="attr_dent_6" value="1" type="checkbox" class="sheet-dent-checkbox"/><span class="sheet-armor-icon"><span class="sheet-shield-icon">e</span></span><span class="sheet-dent-icon"><span class="sheet-dent-icon">t</span></span>
-                        </label>
+                        <input class="sheet-shield-hp" type="number" name="attr_hp"/>
+                        <span class="sheet-shield-hp-label">/ <span name="attr_hp_max"></span> HP (<span name="attr_bt"></span> BT)</span>
                       </div>
                     </div>
                   </div>
@@ -18890,21 +18842,6 @@ function WatchRunes(sectionType)
   });
 }
 
-function WatchDentCap(sectionType)
-{
-  on("change:repeating_"+sectionType+":dent_cap", function (eventInfo) {
-    getAttrs(["repeating_"+sectionType+"_dent_cap"], function (values) {
-      let maxDents = SafeNum(values["repeating_"+sectionType+"_dent_cap"]);
-      let attributes = {};
-      for (let i = 1; i <= 6; ++i)
-      {
-        attributes["repeating_"+sectionType+"_option_dent_"+i] = (i <= maxDents ? 1 : 0);
-      }
-      setAttrs(attributes);
-    });
-  });
-}
-
 function ForceRefresh(sectionType, sectionID)
 {
   getAttrs(["repeating_"+sectionType+"_"+sectionID+"_refresh"], function (values) {
@@ -19174,17 +19111,12 @@ function WatchSlot(targetVariable, categoryType) {
 
 function IsBroken(equipment, sectionType, sectionID)
 {
-  let maxDents = equipment[rID(sectionType, sectionID, "dent_cap")];
-  let dentsTaken = 0;
-  for (let i = 1; i <= maxDents; ++i)
-  {
-    let dent = SafeNum(equipment[rID(sectionType, sectionID, "dent_"+i)]);
-    if (dent)
-    {
-      ++dentsTaken;
-    }
-  }
-  return (dentsTaken >= maxDents);
+  return false;
+  /*
+  let hp = equipment[rID(sectionType, sectionID, "hp")];
+  let hpMax = equipment[rID(sectionType, sectionID, "hp_max")];
+  return (hp <= 0);
+  */
 }
 
 function WatchArmorClass() {
@@ -19198,17 +19130,13 @@ function WatchArmorClass() {
     " change:repeating_armor:check_penalty change:repeating_armor:speed_penalty" +
     " change:repeating_armor:proficiency change:repeating_armor:potency change:repeating_armor:quality" +
     " change:repeating_armor:atrait_clumsy change:repeating_armor:atrait_noisy change:repeating_armor:atrait_fragile" +
-    " change:repeating_armor:dent_cap" +
-    " change:repeating_armor:dent_1 change:repeating_armor:dent_2 change:repeating_armor:dent_3" +
-    " change:repeating_armor:dent_4 change:repeating_armor:dent_5 change:repeating_armor:dent_6" +
+    " change:repeating_armor:hp change:repeating_armor:hp_max change:repeating_armor:hardness" +
     " remove:repeating_shield change:repeating_shield:carry_state" +
     " change:repeating_shield:bonus_ac" +
     " change:repeating_shield:quality" +
     " change:repeating_shield:quality change:repeating_shield:speed_penalty" +
-    " change:repeating_shield:dent_cap" +
-    " change:repeating_shield:dent_1 change:repeating_shield:dent_2 change:repeating_shield:dent_3" +
-    " change:repeating_shield:dent_4 change:repeating_shield:dent_5 change:repeating_shield:dent_6" +
-    " change:repeating_shield:hardness " + GetWatchedModVariables(), function(eventInfo) {
+    " change:repeating_shield:hp change:repeating_shield:hp_max change:repeating_shield:hardness "
+    + GetWatchedModVariables(), function(eventInfo) {
     UpdateArmorClass();
   });
 }
@@ -19232,17 +19160,21 @@ function UpdateArmorClass() {
           "check_penalty", "speed_penalty",
           "proficiency", "potency", "quality",
           "atrait_clumsy", "atrait_fragile", "atrait_noisy",
-          "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
+          "hp", "hp_max"
         ]));
       }
 
       let isWieldingShield = baseValues.option_shield && SafeNum(baseValues.equipped_armor_status) > 0;
       let isShieldRaised = isWieldingShield && SafeNum(baseValues.shield_raised);
       let shieldID = baseValues.equipped_shield_id;
-      if (isWieldingShield) {
+
+      console.log("shield on: " + isWieldingShield);
+      console.log("shield raised: " + isShieldRaised);
+      console.log("shield id: " + shieldID);
+      console.log("shield data: ");
         variables = variables.concat(ListVariables("shield", shieldID, [
           "bonus_ac", "quality", "carry_state", "hardness", "speed_penalty",
-          "dent_cap", "dent_1", "dent_2", "dent_3", "dent_4", "dent_5", "dent_6"
+          "hp", "hp_max"
         ]));
       }
 
@@ -19322,8 +19254,12 @@ function UpdateArmorClass() {
 
         proficiencyBonus = SafeNum(baseValues["bonus_armor_"+armorType]);
 
+        console.log("checking");
         if (isWieldingShield && equipment[rID("shield",shieldID,"carry_state")] == "carried")
         {
+          console.log("shield equipped: ");
+          console.log(equipment);
+
           speedPenalty += Math.min(0, SafeNum(equipment[rID("shield",shieldID,"speed_penalty")]));
 
           if (!IsBroken(equipment, "shield", shieldID))
@@ -19340,8 +19276,10 @@ function UpdateArmorClass() {
               }
             }
             hardness = SafeNum(equipment[rID("shield",shieldID,"hardness")]);
+            console.log("hardness: " + hardness);
           }
         }
+        console.log("done checking");
 
         let ac = 10 + dexBonus + proficiencyBonus +
           Math.max(0,modAC.bonus_status) + Math.max(0,modAC.bonus_circumstance) + Math.max(0,modAC.bonus_item) +
@@ -19369,6 +19307,8 @@ function UpdateArmorClass() {
           armor_check_penalty: checkPenalty,
           armor_speed_penalty: speedPenalty
         };
+        console.log(attributes);
+        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         setAttrs(attributes);
       });
     });
@@ -19641,8 +19581,6 @@ WatchAllDamageProperties("weapon", 2);
 WatchAllDamageProperties("item", 2);
 
 WatchRunes("weapon");
-WatchDentCap("armor");
-WatchDentCap("shield");
 
 WatchSlot("equipped_weapon1", "weapon");
 WatchSlot("equipped_weapon2", "weapon");
