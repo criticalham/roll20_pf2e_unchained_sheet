@@ -109,7 +109,7 @@
       {{#rollGreater() hasArmorProperties 0}}
       <div class="sheet-properties">
         <span class="sheet-property"><span class="sheet-label">AC Bonus</span> +{{ac}}</span>
-        {{#rollGreater() hasMaxDex 0}}<span class="sheet-property"><span class="sheet-label">Max Dex</span> {{maxDex}}</span>{{/rollGreater() hasMaxDex 0}}
+        {{#rollGreater() hasMaxDex 0}}<span class="sheet-property"><span class="sheet-label">DEX Cap</span> {{maxDex}}</span>{{/rollGreater() hasMaxDex 0}}
         {{#checkPenalty}}<span class="sheet-property"><span class="sheet-label">Check Penalty</span> {{checkPenalty}}</span>{{/checkPenalty}}
         {{#speedPenalty}}<span class="sheet-property"><span class="sheet-label">Speed Penalty</span> {{speedPenalty}}</span>{{/speedPenalty}}
         {{#maxDents}}<span class="sheet-property"><span class="sheet-label">Max Dents</span> {{maxDents}}</span>{{/maxDents}}
@@ -17048,7 +17048,7 @@
                               <input name="attr_bonus_ac" type="number" value="0"/>
                             </div>
                             <div class="sheet-item-property-entry">
-                              <span>Max DEX</span>
+                              <span>DEX Cap</span>
                               <div>
                                 <div class="sheet-max-dex-input">
                                   <input name="attr_option_max_dex" value="1" class="sheet-max-dex-checkbox" type="checkbox"/>
@@ -17063,6 +17063,10 @@
                             <div class="sheet-item-property-entry">
                               <span>Speed Penalty</span>
                               <input name="attr_speed_penalty" type="number" value="0" max="0"/>
+                            </div>
+                            <div class="sheet-item-property-entry">
+                              <span>Strength</span>
+                              <input name="attr_min_str" type="number" value="0" min="0"/>
                             </div>
                           </span>
                           <span class="sheet-action-damage-inputs sheet-item-property-set">
@@ -17133,7 +17137,7 @@
                         <div class="sheet-property-line">
                           •
                           <input type="hidden" value="attr_max_dex" class="sheet-hide-next-if-zero"/>
-                          <span>+<span name="attr_max_dex">0</span> max DEX bonus,</span>
+                          <span>+<span name="attr_max_dex">0</span> DEX cap,</span>
                           <span name="attr_check_penalty">0</span> check penalty,
                           <span name="attr_speed_penalty">0</span> speed penalty
                         </div>
@@ -19704,6 +19708,7 @@ function WatchArmorClass() {
     " change:bonus_armor_heavy" +
     " change:equipped_armor_status change:equipped_shield_status" +
     " remove:repeating_armor change:repeating_armor:carry_state" +
+    " change:repeating_armor:min_str" +
     " change:repeating_armor:bonus_ac" +
     " change:repeating_armor:option_max_dex change:repeating_armor:max_dex" +
     " change:repeating_armor:check_penalty change:repeating_armor:speed_penalty" +
@@ -19714,7 +19719,7 @@ function WatchArmorClass() {
     " change:repeating_shield:bonus_ac" +
     " change:repeating_shield:quality" +
     " change:repeating_shield:quality change:repeating_shield:speed_penalty" +
-    " change:repeating_shield:hp change:repeating_shield:hp_max change:repeating_shield:hardness "
+    " change:repeating_shield:hp change:repeating_shield:hp_max change:repeating_shield:hardness"
     + GetWatchedModVariables(), function(eventInfo) {
     UpdateArmorClass();
   });
@@ -19723,7 +19728,7 @@ function WatchArmorClass() {
 function UpdateArmorClass() {
   GetAdjustments(function (adjustments) {
     getAttrs([
-      "dex_mod",
+      "dex_mod", "str_score",
       "equipped_armor_id", "equipped_armor_status",
       "option_shield", "shield_raised", "equipped_shield_id", "equipped_shield_status",
       "bonus_armor_unarmored", "bonus_armor_light", "bonus_armor_medium",
@@ -19739,7 +19744,7 @@ function UpdateArmorClass() {
           "check_penalty", "speed_penalty",
           "proficiency", "potency", "quality",
           "atrait_clumsy", "atrait_fragile", "atrait_noisy",
-          "hp", "hp_max", "bt"
+          "hp", "hp_max", "bt", "min_str"
         ]));
       }
 
@@ -19755,6 +19760,7 @@ function UpdateArmorClass() {
       }
 
       getAttrs(variables, function (equipment) {
+        let strScore = SafeNum(baseValues.str_score);
         let dexBonus = SafeNum(baseValues.dex_mod);
         let proficiencyBonus = 0;
         let armorType = "unarmored";
@@ -19799,6 +19805,13 @@ function UpdateArmorClass() {
 
           armorCheck = SafeNum(equipment[rID("armor",armorID,"check_penalty")]);
           speedPenalty = SafeNum(equipment[rID("armor",armorID,"speed_penalty")]);
+          
+          let armorMinStr = SafeNum(equipment[rID("armor",armorID,"min_str")]);
+
+          if (strScore >= armorMinStr) {
+            armorCheck = 0;
+            speedPenalty = Math.min(0, speedPenalty + 5);
+          }
 
           let quality = equipment[rID("armor",armorID,"quality")];
           switch (quality) {
