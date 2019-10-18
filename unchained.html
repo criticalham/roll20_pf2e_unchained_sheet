@@ -2928,85 +2928,25 @@
           </div>
           <div class="sheet-common-conditions">
             <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_accelerated" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Accelerated</span>
-                  <input class="sheet-condition-value" name="attr_cond_accelerated_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your speed is increased. Applies to all forms of movement unless specified.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_asleep" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Asleep</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You can't act. You take a -4 status penalty to AC and Perception. You critically fail all Reflex saves. When you gain this condition, you typically fall prone and drop any items you are holding/wielding. Taking damage ends this condition.</p>
-                  <p>If you are within an ally's natural reach, they can <span class="sheet-aname"><span class="sheet-a1"></span>Interact</span> to nudge or shake you awake.</p>
-                  <p>If there is loud noise going on around you, you can attempt a <span class="sheet-aname"><span class="sheet-af"></span>Perception</span> check with a -4 circumstance penalty against the noise's DC (or the lowest DC if there are multiple noises). For creatures attempting to stay quiet, this is a Stealth DC. Some magical causes of sleep do not allow you to make this check.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
               <input class="sheet-condition-checkbox" value="1" name="attr_cond_blinded" type="checkbox" />
               <div class="sheet-condition">
                 <div class="sheet-condition-name">
                   <span>Blinded</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p><span class="sheet-condition-override">(Overrides dazzled.)</span></p>
-                  <p>You can't see. All terrain is difficult terrain. All other creatures/objects are unseen to you unless you succeed at a <span class="sheet-aname"><span class="sheet-a1"></span>Seek</span> to sense them. You automatically critically fail Perception checks that require sight. If vision is your only precise sense, you take a -4 status penalty to all Perception checks.</p>
-                  <p>You are immune to visual effects.</p>
+                  <p>You take a -4 status penalty to Perception checks. (Assumes vision is your only precise sense.)</p>
                 </div>
               </div>
             </label>
             <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_concealed" type="checkbox" />
+              <input class="sheet-condition-checkbox" value="1" name="attr_cond_clumsy" type="checkbox" />
               <div class="sheet-condition">
                 <div class="sheet-condition-name">
-                  <span>Concealed</span>
+                  <span>Clumsy</span>
+                  <input class="sheet-condition-value" name="attr_cond_clumsy_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>Creatures that you are concealed from must succeed a DC 5 flat check when targeting you, unless it is an area effect.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_confused" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Confused</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You can't use reactions, nor can you Delay or Ready. On your turn, you must use your actions to attack the creature that attacked you most recently since your last turn. You can use your actions to draw weapons, move so that the creature is in reach, etc as long as the actions lead up to you attacking as required.</p>
-                  <p>If no creature attacked you since your last turn, roll 1d4. On 1, spend your turn attempting to attack the nearest creature. On 2, attack yourself once, hitting automatically for your normal damage, and use no further actions. On 3, do nothing but babble incoherently. On 4, act normally.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_dazzled" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Dazzled</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your eyes are overstimulated. If vision is your only precise sense, all creatures and objects are concealed from you.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_dead" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Dead</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You are no longer alive. You can't act or be affected by spells that target creatures (unless they specifically target dead creatures). For all other purposes, you count as an object. You go to 0 HP and can't be brought above 0 HP as long as you remain dead.</p>
+                  <p>You take a status penalty equal the clumsy value to Dexterity-based checks and DCs (including AC, Reflex, ranged attack rolls, Acrobatics, Stealth, and Thievery).</p>
                 </div>
               </div>
             </label>
@@ -3017,8 +2957,7 @@
                   <span>Deafened</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You automatically critically fail Perception checks that require hearing. You take a -2 status penalty to Perception checks for initiative and checks that involve sound. If you perform an action that involves auditory elements, you must succeed at a DC 5 flat check or the action is lost (roll after the actions are spent but before the effects are applied).</p>
-                  <p>You are immune to auditory effects.</p>
+                  <p>You take a -2 status penalty to Perception checks.</p>
                 </div>
               </div>
             </label>
@@ -3030,22 +2969,7 @@
                   <input class="sheet-condition-value" name="attr_cond_drained_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>Your blood or life force has been drained. You take a status penalty on Fortitude saves and Constitution-based checks. You lose HP and max HP equal to your level (minimum 1) times the drained amount.</p>
-                  <p>When you regain HP by resting, your drained value is reduced by 1. Your max HP increases, but you do not immediately regain the lost HP. When the drained value reaches 0, you lose this condition.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_dying" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Dying</span>
-                  <input class="sheet-condition-value" name="attr_cond_dying_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>If your dying value reaches 4 or greater, you die. You lose this condition upon returning to 1 or more HP. When you lose the dying condition and have HP, you regain consciousness. You also gain the wounded condition (or increase the value by 1 if you already have it).</p>
-                  <p>At the start of each of your turns, attempt a flat check with DC 10 + your dying value. On critical success, reduce by 2. On success reduce by 1. On failure, increase by 1. On critical failure, increase by 2.</p>
-                  <p>If you take damage while dying, incrase the value by 1. If you take damage from a critical hit or critical failure, increase by 2 instead. Nonlethal attacks/effects do not increase your dying value.</p>
+                  <p>You take a status penalty equal the drained value to Constitution-based checks and DCs (such as Fortitude saves). Your HP and max HP is also reduced by your level times the drained value.</p>
                 </div>
               </div>
             </label>
@@ -3056,22 +2980,7 @@
                   <span>Encumbered</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You are carrying more weight than you can manage. All of your movement speeds reduce by 10 feet, to a minimum of 5 feet. Your armor's check penalty increases by 2. If unarmored, you gain a -2 check penalty instead.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_enervated" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Enervated</span>
-                  <input class="sheet-condition-value" name="attr_cond_enervated_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your competency or experience has been stolen away. You take a status penalty equal to the enervation value (up to your level) on all checks that include a proficiency modifier.</p>
-                  <p>Your level is treated as if it were lowered by the enervation value (to a minimum of 1st level) when determining which spells and abilities you can use. This only applies to actions, reactions, free actions, and activities gained from feats and class features that have a level prerequisite.</p>
-                  <p>You do not lose your prepared spells of higher levels, but you cannot cast them until your enervation is sufficiently reduced.</p>
-                  <p>You can attempt a daily Fortitude save to reduce the value by 1 (or 2 on critical success). The DC is the same as the effect that enervated you. You can also spend a day of downtime to train and reduce the value by 1 automatically (in addition to the daily save).</p>
+                  <p>You're clumsy 1 and take a 10-foot penalty to all your speeds (to a minimum of 5 feet).</p>
                 </div>
               </div>
             </label>
@@ -3083,18 +2992,7 @@
                   <input class="sheet-condition-value" name="attr_cond_enfeebled_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You are physically weakened. You take a status penalty on attack rolls, damage rolls, and Strength-based checks.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_entangled" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Entangled</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You are trapped or ensnared. You are hampered 10. If you attempt a manipulate action, reaction, free action, or activity while entangled you must succeed at a DC 5 flat check or it is lost (roll after the actions are spent but before the effects are applied).</p>
+                  <p>You take a status penalty equal the enfeebled value to Strength-based checks and DCs (such as STR-based attack rolls, STR-based damage rolls, and Athletics).</p>
                 </div>
               </div>
             </label>
@@ -3105,8 +3003,7 @@
                   <span>Fascinated</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You are compelled to focus your attention on something. You take a -2 status penalty to Perception and skill checks, and you can't use actions, reactions, free actions, or activities with the concentrate trait unless the intended consequences are related to the subject of your fascination.</p>
-                  <p>This condition ends if creatures act in a hostile fashion towards you or your allies.</p>
+                  <p>You take a -2 status penalty to Perception and all skill checks unrelated to the subject of your fascination.</p>
                 </div>
               </div>
             </label>
@@ -3115,12 +3012,9 @@
               <div class="sheet-condition">
                 <div class="sheet-condition-name">
                   <span>Fatigued</span>
-                  <input class="sheet-condition-value" name="attr_cond_fatigued_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You're tired. You're hampered 5. You take a -1 status penalty to AC and saving throws. After each action you use during an encounter, the penalty increases by 1 until the start of your next turn.</p>
-                  <p>In exploration mode, you can't choose any tactic other than wandering.</p>
-                  <p>This condition ends after having a full night's rest.</p>
+                  <p>You take a -1 status penalty to AC and saving throws.</p>
                 </div>
               </div>
             </label>
@@ -3131,18 +3025,7 @@
                   <span>Flat-Footed</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You're unable to focus your full attention on defense. You take a -2 circumstance penalty to AC.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_fleeing" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Fleeing</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>On your turn, you must spend each of your actions trying to escape the source of your fear as expediently as possible (such as using move actions to flee and interact actions to open doors blocking your way). You cannot Delay or Ready while fleeing.</p>
+                  <p>You take a -2 circumstance penalty to AC.</p>
                 </div>
               </div>
             </label>
@@ -3154,64 +3037,7 @@
                   <input class="sheet-condition-value" name="attr_cond_frightened_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You take a status penalty to your AC, checks, and saving throws. At the end of your turn, the value decreases by 1 unless otherwise specified.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_grabbed" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Grabbed</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You are being held in place, making you immobile and flat-footed. If you attempt a manipulate action, reaction, free action, or activity you must succeed at a DC 5 flat check or it is lost (roll after the actions are spent but before the effects are applied).</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_hampered" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Hampered</span>
-                  <input class="sheet-condition-value" name="attr_cond_hampered_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your speed is reduced. This condition can't reduce your speed below 5 feet. Applies to all forms of movement unless specified.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_immobile" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Immobile</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You can't use any action, reaction, free action, or activity that has the move trait. If an external force would move you, it must succeed a check against the DC of the effect holding you in place or the relevant defense of the monster rooting you (typically its Fortitude DC)</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_paralyzed" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Paralyzed</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your body is frozen in place. You are flat-footed and can't act except to <span class="sheet-aname"><span class="sheet-a1"></span>Recall Knowledge</span> and act in other ways that only require the use of your mind.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_petrified" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Petrified</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You have been turned to stone. You can't act, and you have the blind and deafened conditions. You become an object of Bulk equal to 2x your normal Bulk (16 for Medium creatures, or 8 for Small creatures), AC 9, TAC 5, and Hardness 8. You can take a total number of Dents equal to 1 plus your CON modifier (minimum 1) before being broken.</p>
-                  <p>When turned back into flesh, you have as many HP as you had before being turned to stone minus 5 HP for every Dent you had taken. This can't reduce you below a minimum of 1 HP. If your statue was broken, you come back with exactly 1 HP. If your statue is completely destroyed, you immediately die.</p>
+                  <p>You take a status penalty equal the frightened value to all checks and DCs.</p>
                 </div>
               </div>
             </label>
@@ -3222,83 +3048,19 @@
                   <span>Prone</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You're lying on the ground. You take a -2 circumstance penalty to attack rolls but gain +1 circumstance bonus to AC versus ranged attacks. You're flat-footed against melee attacks.</p>
-                  <p>The only move actions you can use while prone are <span class="sheet-aname"><span class="sheet-a1"></span>Crawl</span> and <span class="sheet-aname"><span class="sheet-a1"></span>Stand</span>.</p>
-                  <p>If you were Climbing or Flying when you would be knocked prone, you fall instead. You can't be knocked prone when Swimming unless you're at the bottom of a body of water.</p>
+                  <p>You are flat-footed and take a -2 circumstance penalty to attack rolls.</p>
                 </div>
               </div>
             </label>
             <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_quick" type="checkbox" />
+              <input class="sheet-condition-checkbox" value="1" name="attr_cond_sickened" type="checkbox" />
               <div class="sheet-condition">
                 <div class="sheet-condition-name">
-                  <span>Quick</span>
+                  <span>Sickened</span>
+                  <input class="sheet-condition-value" name="attr_cond_sickened_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You gain 1 additional action at the start of your turn each round. The source of this condition usually specifies what types of actions you can take with this additional action.</p>
-                  <p>If you gain this condition from multiple sources, you can use the action types specified by any of them (but you still get only 1 extra action).</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_restrained" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Restrained</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p><span class="sheet-condition-override">(Overrides grappled.)</span></p>
-                  <p>You're tied up or otherwise pinned. You are immobile and flat-footed, and you can't do anything with the attack or manipulate traits except <span class="sheet-aname"><span class="sheet-a1"></span>Break Grapple</span> or <span class="sheet-aname"><span class="sheet-a1"></span>Escape</span>.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_sick" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Sick</span>
-                  <input class="sheet-condition-value" name="attr_cond_sick_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You feel ill, and you take a status penalty equal to this value on all checks. You can't willingly injest anything (including potions) while sick.</p>
-                  <p>You can <span class="sheet-aname"><span class="sheet-a1"></span>Retch</span>, attempting a Fortitude save against the DC of the effect that made you sick. On success, you reduce the value by 1 (or by 2 on critical success).</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_slowed" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Slowed</span>
-                  <input class="sheet-condition-value" name="attr_cond_slowed_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>When you regain your actions at the start of your turn, reduce the number of actions by your slowed value.</p>
-                  <p>You cannot Ready an action.</p>
-                  <p>If you become slowed during your turn, you don't lose any actions until the start of your next turn.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_sluggish" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Sluggish</span>
-                  <input class="sheet-condition-value" name="attr_cond_sluggish_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You take a status penalty to AC, attack rolls, Dexterity-based checks, and Reflex saves equal to the condition's value.</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_stunned" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Stunned</span>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>Your boddy is unresponsive. You can't act.</p>
+                  <p>You take a status penalty equal the sickened value to all checks and DCs.</p>
                 </div>
               </div>
             </label>
@@ -3307,10 +3069,10 @@
               <div class="sheet-condition">
                 <div class="sheet-condition-name">
                   <span>Stupefied</span>
+                  <input class="sheet-condition-value" name="attr_cond_stupefied_value" type="number" value="0" min="0" max="90"/>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>Your thoughts/instincts are clouded. You take a status penalty equal to the value on spell rolls, spell DCs, and Intelligence-, Wisdom-, and Charisma-based checks.</p>
-                  <p>When you attempt to cast a spell, you must succeed a spell roll against the DC of the effect that stupefied you or the spell is disrupted.</p>
+                  <p>You take a status penalty equal the sickened value to all Intelligence-based, Wisdom-based, and Charisma-based checks and DCs.</p>
                 </div>
               </div>
             </label>
@@ -3321,23 +3083,7 @@
                   <span>Unconscious</span>
                 </div>
                 <div class="sheet-condition-details">
-                  <p>You can't act, and you have the blinded, deafened, and flat-footed conditions. You take a -4 status penalty to AC.</p>
-                  <p>When you gain this condition, you typically fall prone and drop any items you are wielding/holding. You also lose any remaining actions, and you don't regain your actions and reaction each turn. If you regain consciousness, you have to wait until the start of your turn to get your actions and reaction again.</p>
-                  <p>If you return to 1 HP or more, you become conscious.</p>
-                  <p>While you're unconscious at 0 HP but no longer dying, you naturally return to 1 HP and awaken after sufficient time passes (GM determined--could range from 10 minutes to several hours).</p>
-                </div>
-              </div>
-            </label>
-            <label class="sheet-condition-group">
-              <input class="sheet-condition-checkbox" value="1" name="attr_cond_wounded" type="checkbox" />
-              <div class="sheet-condition">
-                <div class="sheet-condition-name">
-                  <span>Wounded</span>
-                  <input class="sheet-condition-value" name="attr_cond_wounded_value" type="number" value="0" min="0" max="90"/>
-                </div>
-                <div class="sheet-condition-details">
-                  <p>You have been injured during a fight. If you gain the dying condition or increase the dying condition value for any reason, increase the amount you gain or increase by your wounded value.</p>
-                  <p>This condition ends if someone attends to you with <span class="sheet-aname">Treat Wounds</span> or if you are healed to full HP and rest for 10 minutes.</p>
+                  <p>You take a -4 status penalty to AC, Perception, and Reflex. You are also blinded and flat-footed.</p>
                 </div>
               </div>
             </label>
@@ -18313,6 +18059,27 @@ function SetDamageCalculations(sectionType, sectionID, rollNumber, adjustments)
       let totalAdjust = NewAdjustmentTracker();
       if (rollNumber == 1) {
         AddAdjustmentMods("bonus_damage", adjustments, totalAdjust);
+
+        switch (bonusStatName) {
+          case "str_mod":
+            AddAdjustmentMods("bonus_strength", adjustments, totalAdjust);
+            break;
+          case "dex_mod":
+            AddAdjustmentMods("bonus_dexterity", adjustments, totalAdjust);
+            break;
+          case "con_mod":
+            AddAdjustmentMods("bonus_constitution", adjustments, totalAdjust);
+            break;
+          case "int_mod":
+            AddAdjustmentMods("bonus_intelligence", adjustments, totalAdjust);
+            break;
+          case "wis_mod":
+            AddAdjustmentMods("bonus_wisdom", adjustments, totalAdjust);
+            break;
+          case "cha_mod":
+            AddAdjustmentMods("bonus_charisma", adjustments, totalAdjust);
+            break;
+        }
       }
 
       /*
@@ -18423,16 +18190,12 @@ function SetPenalty(adjustments, attrName, penaltyType, penaltyValue)
 }
 function ParseConditionAdjustments(data, adjustments)
 {
-  if (Condition(data, "accelerated")) {
-    SetBonus(adjustments,"all_current_speeds","untyped", Condition(data, "accelerated_value"));
-  }
-  if (Condition(data, "asleep")) {
-    SetPenalty(adjustments,"bonus_perception","status",-4);
-    SetPenalty(adjustments,"ac","status",-4);
-    SetPenalty(adjustments,"bonus_reflex","untyped",-999);
-  }
   if (Condition(data, "blinded")) {
     SetPenalty(adjustments,"bonus_perception","status",-4);
+  }
+  if (Condition(data, "clumsy")) {
+    let clumsyValue = Condition(data, "clumsy_value");
+    SetPenalty(adjustments,"bonus_dexterity","status",-clumsyValue);
   }
   if (Condition(data, "deafened")) {
     SetPenalty(adjustments,"bonus_perception","status",-2);
@@ -18441,16 +18204,16 @@ function ParseConditionAdjustments(data, adjustments)
     SetPenalty(adjustments,"con_score","status",-(Condition(data, "drained_value")*2));
   }
   if (Condition(data, "encumbered") || Condition(data, "encumbered_inventory")) {
-    SetPenalty(adjustments,"check_penalty","untyped",-2);
     SetPenalty(adjustments,"all_current_speeds","untyped",-10);
-  }
-  if (Condition(data, "enervated")) {
-    SetPenalty(adjustments,"trained","status",-Math.min(Condition(data, "enervated_value"), SafeNum(data.level)));
+
+    // also clumsy 1
+    SetPenalty(adjustments,"bonus_dexterity","status",-1);
   }
   if (Condition(data, "enfeebled")) {
-    SetPenalty(adjustments,"bonus_attack","status",-Condition(data, "enfeebled_value"));
-    SetPenalty(adjustments,"bonus_damage","status",-Condition(data, "enfeebled_value"));
-    SetPenalty(adjustments,"bonus_strength","status",-Condition(data, "enfeebled_value"));
+    let enfeebledValue = Condition(data, "enfeebled_value");
+    //SetPenalty(adjustments,"bonus_attack","status",-enfeebledValue);
+    //SetPenalty(adjustments,"bonus_damage","status",-enfeebledValue);
+    SetPenalty(adjustments,"bonus_strength","status",-enfeebledValue);
   }
   if (Condition(data, "fascinated")) {
     SetPenalty(adjustments,"bonus_perception","status",-2);
@@ -18462,14 +18225,13 @@ function ParseConditionAdjustments(data, adjustments)
     SetPenalty(adjustments,"bonus_fortitude","status",-fatiguedValue);
     SetPenalty(adjustments,"bonus_reflex","status",-fatiguedValue);
     SetPenalty(adjustments,"bonus_will","status",-fatiguedValue);
-    SetPenalty(adjustments,"bonus_recovery","status",-fatiguedValue);
   }
   if (Condition(data,"flatfooted")) {
     SetPenalty(adjustments,"ac","circumstance",-2);
   }
 
   if (Condition(data,"frightened")) {
-    let frightenedValue = Condition(data,"frightened");
+    let frightenedValue = Condition(data,"frightened_value");
     SetPenalty(adjustments,"bonus_strength","status",-frightenedValue);
     SetPenalty(adjustments,"bonus_dexterity","status",-frightenedValue);
     SetPenalty(adjustments,"bonus_constitution","status",-frightenedValue);
@@ -18477,55 +18239,55 @@ function ParseConditionAdjustments(data, adjustments)
     SetPenalty(adjustments,"bonus_wisdom","status",-frightenedValue);
     SetPenalty(adjustments,"bonus_charisma","status",-frightenedValue);
   }
-  if (Condition(data,"hampered")) {
-    SetPenalty(adjustments,"all_current_speeds","untyped",-Condition(data,"hampered_value"));
-  }
+
   if (Condition(data,"prone")) {
     SetMinMax(adjustments,"bonus_attack",-2);
+
+    // also flat-footed
+    SetPenalty(adjustments,"ac","circumstance",-2);
   }
 
-  if (Condition(data, "sick")) {
-    let sickValue = Condition(data, "sick_value");
-    SetPenalty(adjustments,"str_mod","status",-sickValue);
-    SetPenalty(adjustments,"dex_mod","status",-sickValue);
-    SetPenalty(adjustments,"con_mod","status",-sickValue);
-    SetPenalty(adjustments,"int_mod","status",-sickValue);
-    SetPenalty(adjustments,"wis_mod","status",-sickValue);
-    SetPenalty(adjustments,"cha_mod","status",-sickValue);
-  }
-  if (Condition(data, "sluggish")) {
-    let sluggishValue = Condition(data, "sluggish_value");
-    SetPenalty(adjustments,"dex_mod","status",-sluggishValue);
-    SetPenalty(adjustments,"bonus_attack","status",-sluggishValue);
+  if (Condition(data, "sickened")) {
+    let sickenedValue = Condition(data,"sickened_value");
+    SetPenalty(adjustments,"bonus_strength","status",-sickenedValue);
+    SetPenalty(adjustments,"bonus_dexterity","status",-sickenedValue);
+    SetPenalty(adjustments,"bonus_constitution","status",-sickenedValue);
+    SetPenalty(adjustments,"bonus_intelligence","status",-sickenedValue);
+    SetPenalty(adjustments,"bonus_wisdom","status",-sickenedValue);
+    SetPenalty(adjustments,"bonus_charisma","status",-sickenedValue);
   }
 
   if (Condition(data, "stupefied")) {
     let stupefiedValue = Condition(data, "stupefied_value");
-    SetPenalty(adjustments,"int_mod","status",-stupefiedValue);
-    SetPenalty(adjustments,"wis_mod","status",-stupefiedValue);
-    SetPenalty(adjustments,"cha_mod","status",-stupefiedValue);
+    SetPenalty(adjustments,"bonus_intelligence","status",-stupefiedValue);
+    SetPenalty(adjustments,"bonus_wisdom","status",-stupefiedValue);
+    SetPenalty(adjustments,"bonus_charisma","status",-stupefiedValue);
   }
   if (Condition(data, "unconscious")) {
     SetPenalty(adjustments,"ac","status",-4);
+    SetPenalty(adjustments,"bonus_perception","status",-4);
+    SetPenalty(adjustments,"bonus_reflex","status",-4);
   }
-  if (Condition(data, "wounded")) {
-    SetPenalty(adjustments,"bonus_recovery","status",-Condition(data, "wounded_value"));
-  }
-
 }
 function GetAdjustments(callback)
 {
   GetSectionIDsOrdered("mod", function (modIDs) {
     let variables = [
       "level",
-      "cond_accelerated", "cond_accelerated_value", "cond_asleep", "cond_blinded", "cond_concealed",
-      "cond_confused", "cond_dazzled", "cond_dead", "cond_deafened", "cond_drained", "cond_dying",
-      "cond_encumbered", "cond_encumbered_inventory", "cond_enervated", "cond_enervated_value", "cond_enfeebled", "cond_enfeebled_value",
-      "cond_entangled", "cond_fascinated", "cond_fatigued", "cond_fatigued_value", "cond_flatfooted",
-      "cond_fleeing", "cond_frightened", "cond_frightened_value", "cond_grabbed", "cond_hampered",
-      "cond_hampered_value", "cond_immobile", "cond_paralyzed", "cond_petrified", "cond_prone", "cond_quick",
-      "cond_restrained", "cond_sick", "cond_sick_value", "cond_slowed", "cond_slowed_value", "cond_sluggish",
-      "cond_sluggish_value", "cond_stunned", "cond_stupefied", "cond_unconscious", "cond_wounded", "cond_wounded_value"
+      "cond_blinded",
+      "cond_clumsy", "cond_clumsy_value",
+      "cond_deafened",
+      "cond_drained", "cond_drained_value",
+      "cond_encumbered", "cond_encumbered_inventory",
+      "cond_enfeebled", "cond_enfeebled_value",
+      "cond_fascinated",
+      "cond_fatigued",
+      "cond_flatfooted",
+      "cond_frightened", "cond_frightened_value", 
+      "cond_prone",
+      "cond_sickened", "cond_sickened_value",
+      "cond_stupefied", "cond_stupefied_value",
+      "cond_unconscious"
     ];
     variables = variables.concat(ListAllVariables("mod", modIDs, [
       "active", "property_count",
@@ -18736,14 +18498,20 @@ function CalculateStat(ability, values, adjustments, attributes) {
 }
 function GetWatchedModVariables() {
   return " change:level" +
-    " change:cond_accelerated change:cond_accelerated_value change:cond_asleep change:cond_blinded change:cond_concealed" +
-    " change:cond_confused change:cond_dazzled change:cond_dead change:cond_deafened change:cond_drained change:cond_dying" +
-    " change:cond_encumbered change:cond_encumbered_inventory change:cond_enervated change:cond_enervated_value change:cond_enfeebled change:cond_enfeebled_value" +
-    " change:cond_entangled change:cond_fascinated change:cond_fatigued change:cond_fatigued_value change:cond_flatfooted" +
-    " change:cond_fleeing change:cond_frightened change:cond_frightened_value change:cond_grabbed change:cond_hampered" +
-    " change:cond_hampered_value change:cond_immobile change:cond_paralyzed change:cond_petrified change:cond_prone change:cond_quick" +
-    " change:cond_restrained change:cond_sick change:cond_sick_value change:cond_slowed change:cond_slowed_value change:cond_sluggish" +
-    " change:cond_sluggish_value change:cond_stunned change:cond_stupefied change:cond_unconscious change:cond_wounded change:cond_wounded_value" +
+    " change:cond_blinded" +
+    " change:cond_clumsy change:cond_clumsy_value" +
+    " change:cond_deafened" +
+    " change:cond_drained change:cond_drained_value" +
+    " change:cond_encumbered change:cond_encumbered_inventory" +
+    " change:cond_enfeebled change:cond_enfeebled_value" +
+    " change:cond_fascinated" +
+    " change:cond_fatigued" +
+    " change:cond_flatfooted" +
+    " change:cond_frightened change:cond_frightened_value" +
+    " change:cond_prone" +
+    " change:cond_sickened change:cond_sickened_value" +
+    " change:cond_stupefied change:cond_stupefied_value" +
+    " change:cond_unconscious" +
     " remove:repeating_mod" +
     " change:repeating_mod:active change:repeating_mod:property_count" +
     " change:repeating_mod:property1_value change:repeating_mod:property1_type" +
@@ -18871,6 +18639,7 @@ function WatchProficiency(skillName, baseStats, categories)
     GetWatchedModVariables(), function () {
     GetAdjustments(function (adjustments) {
       getAttrs(["level", "proficiency_"+skillName, "armor_check_penalty", "armor_clumsy", "armor_noisy", "armor_dex_cap"].concat(ListModVariables(baseStats)), function (values) {
+
         let attributes = {};
 
         let baseTotal = NewAdjustmentTracker();
@@ -18951,27 +18720,25 @@ function WatchProficiency(skillName, baseStats, categories)
           let baseStat = baseStats[i];
           AddBaseStatMods(baseStat, values, total);
 
-          if (!categories.includes("save")) {
-            switch (baseStat) {
-              case "str":
-                AddAdjustmentMods("bonus_strength", adjustments, total);
-                break;
-              case "dex":
-                AddAdjustmentMods("bonus_dexterity", adjustments, total);
-                break;
-              case "con":
-                AddAdjustmentMods("bonus_constitution", adjustments, total);
-                break;
-              case "int":
-                AddAdjustmentMods("bonus_intelligence", adjustments, total);
-                break;
-              case "wis":
-                AddAdjustmentMods("bonus_wisdom", adjustments, total);
-                break;
-              case "cha":
-                AddAdjustmentMods("bonus_strength", adjustments, total);
-                break;
-            }
+          switch (baseStat) {
+            case "str":
+              AddAdjustmentMods("bonus_strength", adjustments, total);
+              break;
+            case "dex":
+              AddAdjustmentMods("bonus_dexterity", adjustments, total);
+              break;
+            case "con":
+              AddAdjustmentMods("bonus_constitution", adjustments, total);
+              break;
+            case "int":
+              AddAdjustmentMods("bonus_intelligence", adjustments, total);
+              break;
+            case "wis":
+              AddAdjustmentMods("bonus_wisdom", adjustments, total);
+              break;
+            case "cha":
+              AddAdjustmentMods("bonus_charisma", adjustments, total);
+              break;
           }
 
           let bonus = CalculateProficiency(values[baseStat+"_mod_base"], values.level, proficiency);
