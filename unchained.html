@@ -17739,8 +17739,8 @@ function rID(sectionType, sectionID, variable)
 }
 function CalculateBoosts(ability, b)
 {
-  let level = +(b.level);
-  let baseValue = +(b["base_"+ability]);
+  let level = SafeNum(b.level);
+  let baseValue = SafeNum(b["base_"+ability]);
   let totalBoost = 
     (b.boost_class == ability ? 1 : 0) + 
     (b.flaw_ancestry == ability ? -1 : 0) +
@@ -18983,7 +18983,8 @@ function WatchReagents() {
   on("change:base_reagent_bonus change:base_reagent_stat" +
     " change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod", function () {
     getAttrs(["base_reagent_stat"], function (prevalues) {
-      getAttrs(["base_reagent_bonus", prevalues.base_reagent_stat], function (values) {
+      getAttrs(["level", "base_reagent_bonus", prevalues.base_reagent_stat], function (values) {
+        let level = SafeNum(values.level);
         let bonus = SafeNum(values.base_reagent_bonus);
         setAttrs({reagent_max: level + bonus + RetrieveMod(values)});
       });
