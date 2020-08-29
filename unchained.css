@@ -1424,6 +1424,9 @@ input[type="text"].sheet-mod-conditions {
 .sheet-page .sheet-hide-health-bar[value="0"] ~ div .sheet-health-bar-container {
   display: none !important;
 }
+.sheet-page .sheet-hide-stamina[value="0"] ~ div .sheet-stamina-container {
+  display: none !important;
+}
 .sheet-page .sheet-hide-shield[value="0"] ~ div .sheet-shield-section {
   display: none;
 }
