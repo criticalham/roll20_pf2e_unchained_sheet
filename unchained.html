@@ -16653,7 +16653,8 @@ function WatchSpeeds() {
 
 function WatchHP() {
   on("sheet:opened change:level change:hp change:hp_max change:hp_temp change:base_hp_ancestry change:base_hp_class" +
-    " change:sp change:sp_max change:option_stamina" +
+    " change:sp change:rp change:option_stamina" +
+    " change:boost_class change:str_score change:dex_score change:int_score change:wis_score change:cha_score" +
     " change:con_score change:base_hp_bonus change:has_toughness change:base_hp_toughness" + GetWatchedModVariables(), function () {
     GetAdjustments(function (adjustments) {
       getAttrs(["level", "hp", "hp_temp", "base_hp_ancestry", "base_hp_class", "base_hp_bonus", "has_toughness",
