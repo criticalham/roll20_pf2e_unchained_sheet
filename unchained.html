@@ -16964,6 +16964,7 @@ function WatchDamageProperties(sectionType, damageID)
     " change:repeating_"+sectionType+":damage"+damageID+"_bonus" + 
     " change:repeating_"+sectionType+":damage"+damageID+"_stat" +
     " change:repeating_"+sectionType +
+    " change:repeating_mod" +
     watchedTraits, function (eventInfo) {
     let sectionID = GetCurrentSectionID(eventInfo);
     GetAdjustments(function (adjustments) {
