@@ -16957,11 +16957,13 @@ function WatchDamageProperties(sectionType, damageID)
     watchedTraits += " change:repeating_"+sectionType+":"+traitParams[i];
   }
 
-  on("change:repeating_"+sectionType+":option_damage" +
+  on("change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod change:bonus_damage" +
+    " change:repeating_"+sectionType+":option_damage" +
     " change:repeating_"+sectionType+":damage"+damageID+"_die_count" +
     " change:repeating_"+sectionType+":damage"+damageID+"_die_size" +
     " change:repeating_"+sectionType+":damage"+damageID+"_bonus" + 
     " change:repeating_"+sectionType+":damage"+damageID+"_stat" +
+    " change:repeating_"+sectionType +
     watchedTraits, function (eventInfo) {
     let sectionID = GetCurrentSectionID(eventInfo);
     GetAdjustments(function (adjustments) {
