@@ -3386,6 +3386,16 @@
               <div class="sheet-proficiency-row">
                 <div class="sheet-proficiency-name">Unarmed</div>
                 <div class="sheet-proficiency-group">
+                  <!-- start flat proficiencies -->
+                  <!-- These should always effectively be zero. -->
+                  <input type="hidden" name="attr_bonus_weapon_flat" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_str" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_dex" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_con" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_int" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_wis" value="0"/>
+                  <input type="hidden" name="attr_bonus_weapon_flat_cha" value="0"/>
+                  <!-- end flat proficiencies -->
                   <div class="sheet-skill-mod">
                     <input type="hidden" class="sheet-change-next" value="0" name="attr_bonus_weapon_unarmed_change"/>
                     <span class="sheet-skill-mod-value" name="attr_bonus_weapon_unarmed">0</span>
@@ -13991,6 +14001,7 @@
                                   <option value="martial">Martial</option>
                                   <option value="specific">Specific</option>
                                   <option value="unarmed">Unarmed</option>
+                                  <option value="flat">Flat</option>
                                 </select>
                               </div>
                             </div>
