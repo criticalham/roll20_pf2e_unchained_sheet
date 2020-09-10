@@ -16923,18 +16923,7 @@ function ForceDefaultValues() {
     UpdateWeaponRollCalculations();
   });
 
-  on("sheet:opened change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod change:repeating_mod change:repeating_weapon change:repeating_action change:repeating_item change:bonus_damage" +
-    " change:repeating_spell0" +
-    " change:repeating_spell1" +
-    " change:repeating_spell2" +
-    " change:repeating_spell3" +
-    " change:repeating_spell4" +
-    " change:repeating_spell5" +
-    " change:repeating_spell6" +
-    " change:repeating_spell7" +
-    " change:repeating_spell8" +
-    " change:repeating_spell9" +
-    " change:repeating_spell10", function () {
+  on("sheet:opened change:str_mod change:dex_mod change:con_mod change:int_mod change:wis_mod change:cha_mod change:damage_mod change:repeating_mod", function () {
     UpdateSectionDamageCalculations("action");
     UpdateSectionDamageCalculations("spell0");
     UpdateSectionDamageCalculations("spell1");
@@ -16976,7 +16965,6 @@ function WatchDamageProperties(sectionType, damageID)
     " change:repeating_"+sectionType +
     "  " +
     watchedTraits, function (eventInfo) {
-    console.log("helps");
     let sectionID = GetCurrentSectionID(eventInfo);
     GetAdjustments(function (adjustments) {
       SetDamageCalculations(sectionType, sectionID, damageID, adjustments);
